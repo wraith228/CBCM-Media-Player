@@ -138,9 +138,13 @@ Ext.define('MyApp.controller.Search', {
 	},
 	
 	//search bar overlay function
-	searchPop: function() {
-		var searchOverlay = Ext.create('MyApp.view.SearchPanel');
-		searchOverlay.show();
+	searchPop: function(button) {
+		var searchPanel = Ext.Viewport.down('searchPanel');
+		if(!searchPanel){
+			searchPanel = Ext.widget('searchPanel');
+		}
+		
+		searchPanel.showBy(button);
 	},
 
 	//info overlay function
