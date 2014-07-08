@@ -1,6 +1,6 @@
 //search bar overlay view
 Ext.define('MyApp.view.SearchPanel', {
-    extend: 'Ext.Panel',
+    extend: 'Ext.form.Panel',
     alias : 'widget.searchPanel',
  
     config: {		
@@ -8,6 +8,7 @@ Ext.define('MyApp.view.SearchPanel', {
 		modal: true,
 		hideOnMaskTap: true,
 		top: 0,	
+		left: 0,
 		showAnimation: 'slideIn',
 		hideAnimation: {
 			type: 'slideOut',
