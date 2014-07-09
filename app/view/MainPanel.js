@@ -9,6 +9,7 @@ Ext.define('MyApp.view.MainPanel', {
 			{
 				xtype: 'titlebar',
 				docked: 'top',
+				id: 'cbcmTitle',
 				title: 'CBCM Media Player',
 				items: [
 					//info button

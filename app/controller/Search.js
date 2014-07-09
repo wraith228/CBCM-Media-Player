@@ -6,7 +6,7 @@ Ext.define('MyApp.controller.Search', {
 		stores : ['Videos'],
 		models : ['Video'],
 		refs: {
-			myContainer: 'searchPanel'
+			myContainer: 'searchPanel',
 		},
 		control: {
 			'searchPanel': {
@@ -138,13 +138,13 @@ Ext.define('MyApp.controller.Search', {
 	},
 	
 	//search bar overlay function
-	searchPop: function(button) {
+	searchPop: function(searchPanel) {
 		var searchPanel = Ext.Viewport.down('searchPanel');
-		if(!searchPanel){
+		if (!searchPanel) {
 			searchPanel = Ext.widget('searchPanel');
 		}
-		
-		searchPanel.showBy(button);
+		searchPanel.reset();
+		searchPanel.showBy(searchPanel, 'bl-tl?');
 	},
 
 	//info overlay function

@@ -110,10 +110,8 @@ C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\res\screen\windows-phone\screen-portrait.jpg \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\css \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\icons \
-C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\images \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\startup \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\css\app.css \
-C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\css\bb10.css \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\icons\icon-spot~ipad.png \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\icons\Icon.png \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\icons\Icon@2x.png \
@@ -122,7 +120,6 @@ C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\icons\Icon~ipad.png \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\icons\Icon~ipad@2x.png \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\icons\iTunesArtwork.png \
-C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\images\sencha-large.png \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\startup\1496x2048.png \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\startup\1536x2008.png \
 C:\Users\Wraith\Desktop\Projects\Tutorial\phonegap\platforms\android\assets\www\resources\startup\320x460.jpg \

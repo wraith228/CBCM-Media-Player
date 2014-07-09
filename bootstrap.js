@@ -670,7 +670,9 @@ Ext.ClassManager.addNameAlternateMappings({
   "MyApp.controller.Search": [],
   "MyApp.model.Video": [],
   "MyApp.store.Videos": [],
+  "MyApp.view.InfoPanel": [],
   "MyApp.view.MainPanel": [],
+  "MyApp.view.ResultsPanel": [],
   "MyApp.view.SearchPanel": []
 });
 Ext.ClassManager.addNameAliasMappings({
@@ -1393,8 +1395,14 @@ Ext.ClassManager.addNameAliasMappings({
   "MyApp.controller.Search": [],
   "MyApp.model.Video": [],
   "MyApp.store.Videos": [],
+  "MyApp.view.InfoPanel": [
+    "widget.infoPanel"
+  ],
   "MyApp.view.MainPanel": [
     "widget.mainPanel"
+  ],
+  "MyApp.view.ResultsPanel": [
+    "widget.resultsPanel"
   ],
   "MyApp.view.SearchPanel": [
     "widget.searchPanel"
