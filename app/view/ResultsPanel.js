@@ -41,19 +41,33 @@ Ext.define('MyApp.view.ResultsPanel', {
 					xtype: 'selectfield',
 					autoSelect: false,
 					flex: 1,
-					
-					action: 'getSelect',
 				},
 				items: [
 					{
 						id: 'sortDate',
+						name: 'sortDates',
 						valueField: 'value',
 						placeHolder: 'Date',
 						required: true,
 						options: [
-							{text: 'Newest',  value: 'newest'},
+							{text: 'Newest', value: 'newest'},
 							{text: 'Oldest', value: 'oldest'},
-						]
+						],
+						listeners: {
+							change: {
+								click: 'el',
+								fn: function(field, value) {
+									var store = Ext.getStore('Videos');
+			
+									if(value == 'newest'){
+										store.sort('postDate', 'DESC');
+									}
+									else if(value == 'oldest'){
+										store.sort('postDate', 'ASC');
+									}
+								}
+							}
+						}
 					},
 					{
 						id: 'sortCongregation',
@@ -61,10 +75,45 @@ Ext.define('MyApp.view.ResultsPanel', {
 						placeHolder: 'Congregation',
 						required: true,
 						options: [
-							{text: 'First',  value: 'first'},
-							{text: 'Second', value: 'second'},
-							{text: 'Third', value: 'third'},
-						]
+							{text: '',  value: null},
+							{text: 'cong1',  value: 'cong1'},
+							{text: 'cong2', value: 'cong2'},
+							{text: 'cong3', value: 'cong3'},
+						],
+						
+						listeners: {
+							change: {
+								click: 'el',
+								fn: function(field, value) {
+									congFilt = value;
+									var store = Ext.getStore('Videos');
+									store.clearFilter();
+									
+									var thisRegEx = new RegExp(searchGlobal, "i");
+									store.filterBy(function(record) {
+										if (thisRegEx.test(record.get('name')) ||
+										  thisRegEx.test(record.get('postDate')) ||
+										  thisRegEx.test(record.get('cong')) ||
+										  thisRegEx.test(record.get('speaker')) ||
+										  thisRegEx.test(record.get('topic'))) {
+											return true;
+										};
+										return false;
+									});
+									
+									if (congFilt != null) {
+										store.filter('cong', congFilt);
+									};
+									if (speakFilt != null) {
+										store.filter('speaker', speakFilt);
+									};
+									if (topicFilt != null) {
+										store.filter('topic', topicFilt);
+									};
+								}
+							}
+						}
+						
 					},
 					{
 						id: 'sortTopic',
@@ -72,10 +121,45 @@ Ext.define('MyApp.view.ResultsPanel', {
 						placeHolder: 'Topic',
 						required: true,
 						options: [
-							{text: 'First',  value: 'first'},
-							{text: 'Second', value: 'second'},
-							{text: 'Third', value: 'third'},
-						]
+							{text: '',  value: null},
+							{text: 'topic1',  value: 'topic1'},
+							{text: 'topic2', value: 'topic2'},
+							{text: 'topic3', value: 'topic3'},
+						],
+						
+						listeners: {
+							change: {
+								click: 'el',
+								fn: function(field, value) {
+									topicFilt = value;
+									var store = Ext.getStore('Videos');
+									store.clearFilter();
+									
+									var thisRegEx = new RegExp(searchGlobal, "i");
+									store.filterBy(function(record) {
+										if (thisRegEx.test(record.get('name')) ||
+										  thisRegEx.test(record.get('postDate')) ||
+										  thisRegEx.test(record.get('cong')) ||
+										  thisRegEx.test(record.get('speaker')) ||
+										  thisRegEx.test(record.get('topic'))) {
+											return true;
+										};
+										return false;
+									});
+									
+									if (congFilt != null) {
+										store.filter('cong', congFilt);
+									};
+									if (speakFilt != null) {
+										store.filter('speaker', speakFilt);
+									};
+									if (topicFilt != null) {
+										store.filter('topic', topicFilt);
+									};
+								}
+							}
+						}
+						
 					},
 					{
 						id: 'sortSpeaker',
@@ -83,12 +167,49 @@ Ext.define('MyApp.view.ResultsPanel', {
 						placeHolder: 'Speaker',
 						required: true,
 						options: [
-							{text: 'First',  value: 'first'},
-							{text: 'Second', value: 'second'},
-							{text: 'Third', value: 'third'},
-						]
+							{text: '',  value: null},
+							{text: 'speaker1',  value: 'speaker1'},
+							{text: 'speaker2', value: 'speaker2'},
+							{text: 'speaker3', value: 'speaker3'},
+						],
+						
+						listeners: {
+							change: {
+								click: 'el',
+								fn: function(field, value) {
+									speakFilt = value;
+									var store = Ext.getStore('Videos');
+									store.clearFilter();
+									
+									var thisRegEx = new RegExp(searchGlobal, "i");
+									store.filterBy(function(record) {
+										if (thisRegEx.test(record.get('name')) ||
+										  thisRegEx.test(record.get('postDate')) ||
+										  thisRegEx.test(record.get('cong')) ||
+										  thisRegEx.test(record.get('speaker')) ||
+										  thisRegEx.test(record.get('topic'))) {
+											return true;
+										};
+										return false;
+									});
+									
+									if (congFilt != null) {
+										store.filter('cong', congFilt);
+									};
+									if (speakFilt != null) {
+										store.filter('speaker', speakFilt);
+									};
+									if (topicFilt != null) {
+										store.filter('topic', topicFilt);
+									};
+								}
+							}
+						}
+						
 					},
-				]
+					
+				],
+				
 			},
 				
 			//Videos store list code

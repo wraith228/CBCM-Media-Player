@@ -34,36 +34,43 @@ Ext.define('MyApp.controller.Search', {
 			'button[action=callAdded]': {
 				tap: 'addedSort'
 			},
-			'resultsPanel selectfield[itemId=sortSelect]': {
-				tap: 'getValue'
+			/*
+			'resultsPanel selectfield[itemId=sortDate]': {
+				change: 'getValue'
 			},
+			*/
 		} 
 	},
 	
 	onActivate: function() {
 		console.log('Main container is active');
 	},
-	
-	getValue: function(selectField) {
-		queryString = selectField.getValue();
+	/*
+	getValue: function(field, value) {
+		value = value.get(field.getValueField());
 		var store = Ext.getStore('Videos');
-
-		if(queryString == 'newest'){
-			 Ext.Msg.alert('Selected Item');
-			//store.sort('postDate', 'DESC');
+		Ext.Msg.alert('Selected Item');
+		if(temp == 'newest'){
+			//Ext.Msg.alert('Selected Item');
+			store.sort('postDate', 'DESC');
 		}
-		else if(queryString == 'oldest'){
+		else if(temp == 'oldest'){
 			store.sort('postDate', 'ASC');
 		}
 	},
-	
+	*/
 	//search function
 	onSearchKeyUp: function(searchField) {
 		Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);  
 		Ext.Viewport.setActiveItem(Ext.widget('resultsPanel'));
 		queryString = searchField.getValue();
-		console.log(this,'Please search by: ' + queryString);
-
+		searchGlobal = queryString;
+		console.log(this,'Searching by: ' + queryString);
+		
+		congFilt = null;
+		speakFilt = null;
+		topicFilt = null;
+		
 		var store = Ext.getStore('Videos');
 		store.clearFilter();
 
