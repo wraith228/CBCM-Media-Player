@@ -43,6 +43,7 @@ Ext.define('MyApp.view.ResultsPanel', {
 					flex: 1,
 				},
 				items: [
+					//date sort
 					{
 						id: 'sortDate',
 						name: 'sortDates',
@@ -69,6 +70,7 @@ Ext.define('MyApp.view.ResultsPanel', {
 							}
 						}
 					},
+					//congregation filter
 					{
 						id: 'sortCongregation',
 						valueField: 'value',
@@ -115,6 +117,7 @@ Ext.define('MyApp.view.ResultsPanel', {
 						}
 						
 					},
+					//topic filter
 					{
 						id: 'sortTopic',
 						valueField: 'value',
@@ -161,6 +164,7 @@ Ext.define('MyApp.view.ResultsPanel', {
 						}
 						
 					},
+					//speaker filter
 					{
 						id: 'sortSpeaker',
 						valueField: 'value',
@@ -216,6 +220,7 @@ Ext.define('MyApp.view.ResultsPanel', {
 			{
                 xtype: 'list',
                 store : 'Videos',
+				action: 'getLink',
 				itemTpl: [
 					'<table>',
 						'<tr>',
