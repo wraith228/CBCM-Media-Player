@@ -81,6 +81,7 @@ Ext.define('MyApp.view.MainPanel', {
 			{
                 xtype: 'list',
                 store : 'Videos',
+				action: 'getLink',
 				itemTpl: [
 					'<table>',
 						'<tr>',

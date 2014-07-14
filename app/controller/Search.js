@@ -7,9 +7,10 @@ Ext.define('MyApp.controller.Search', {
 		models : ['Video'],
 		refs: {
 			myContainer: 'searchPanel',
+			myContainer: 'mainPanel',
 		},
 		control: {
-			'searchPanel': {
+			'mainPanel': {
 				activate: 'onActivate'
 			},
 			'searchPanel searchfield[itemId=searchBox]' : {
@@ -34,31 +35,22 @@ Ext.define('MyApp.controller.Search', {
 			'button[action=callAdded]': {
 				tap: 'addedSort'
 			},
-			/*
-			'resultsPanel selectfield[itemId=sortDate]': {
-				change: 'getValue'
+			'list[action=getLink]' : {
+				itemtap: 'videoTap',
 			},
-			*/
 		} 
 	},
 	
 	onActivate: function() {
 		console.log('Main container is active');
 	},
-	/*
-	getValue: function(field, value) {
-		value = value.get(field.getValueField());
-		var store = Ext.getStore('Videos');
-		Ext.Msg.alert('Selected Item');
-		if(temp == 'newest'){
-			//Ext.Msg.alert('Selected Item');
-			store.sort('postDate', 'DESC');
-		}
-		else if(temp == 'oldest'){
-			store.sort('postDate', 'ASC');
-		}
+	
+	videoTap: function(view, index, target, record, event) {
+		console.log(record.get('name'));
+		Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);  
+		Ext.Viewport.setActiveItem(Ext.widget('videoPanel'));
 	},
-	*/
+	
 	//search function
 	onSearchKeyUp: function(searchField) {
 		Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);  
@@ -102,6 +94,7 @@ Ext.define('MyApp.controller.Search', {
 		Ext.Viewport.setActiveItem(Ext.widget('mainPanel'));
 		var store = Ext.getStore('Videos');
 		store.clearFilter();
+		MyApp.app.getController('Search').popularSort();
 	},
 	
 	//popularity store sort function
