@@ -10,15 +10,27 @@ Ext.define('MyApp.view.MainPanel', {
 				xtype: 'titlebar',
 				docked: 'top',
 				id: 'cbcmTitle',
-				title: 'CBCM Media Player',
+				//title: 'CBCM Media Player',
+				
 				items: [
-					//info button
+					//menu button
 					{
 						xtype: 'button',
-						iconCls: 'info',
-						align: 'left',
-						itemID: 'infoBtn',
-						action: 'callInfo'
+						iconCls: 'user',
+						//align: 'left',
+						itemID: 'menuBtn',
+						action: 'callMenu'
+					},
+					{
+						xtype: 'spacer',
+						width: (window.innerWidth /2) - 134
+					},
+					{
+						xtype: 'button',
+						text: 'CBCM Media Player',
+						
+						itemID: 'homeBtn',
+						action: 'callHome'
 					},
 					//search button
 					{
@@ -57,26 +69,12 @@ Ext.define('MyApp.view.MainPanel', {
 					},
 					//categories button
 					{
-						id: 'categoryBtn',
-						text: 'Categories',
-						action: 'callRec'
+						id: 'liveBtn',
+						text: 'Livestreams',
+						action: 'callLive'
 					}
 				]				
 			},
-			/*
-			//main search bar code
-			{
-				xtype: 'toolbar',
-				docked: 'top',				
-				items: [
-					{
-						xtype: 'searchfield',
-						placeHolder: 'Search...',
-						itemId: 'searchBox',
-						flex: 1
-					}
-				]
-			},*/
 			//Videos store list code
 			{
                 xtype: 'list',
@@ -92,18 +90,7 @@ Ext.define('MyApp.view.MainPanel', {
 					'</table>',
 				],
 				emptyText: '<div class="Content">No Matching Videos</div>',
-				/*
-				itemTpl: [
-					'<table>',
-						'<tr>',
-							'<td><img width="128" height="72" src="http://www.wnyc.org/i/620/372/l/80/1/blackbox.jpeg" /></td>',
-							'<td><h2><b>{name}</b><h2>',
-							'Views: {views}</td>',
-						'</tr>',
-					'</table>',
-				],
-				*/
-            }
+            },
 		]  
     }
 });

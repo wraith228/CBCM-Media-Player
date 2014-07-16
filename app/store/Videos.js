@@ -1,9 +1,7 @@
 Ext.define('MyApp.store.Videos', {
     extend: 'Ext.data.Store',
      
-    requires: [
-        'MyApp.model.Video'
-    ],
+    requires: ['MyApp.model.Video'],
 	autoLoad: true,
 
     constructor: function(cfg) {

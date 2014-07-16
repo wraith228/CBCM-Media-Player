@@ -10,15 +10,27 @@ Ext.define('MyApp.view.ResultsPanel', {
 				xtype: 'titlebar',
 				docked: 'top',
 				id: 'cbcmTitle',
-				title: 'CBCM Media Player',
+				//title: 'CBCM Media Player',
+				
 				items: [
-					//home button
+					//menu button
 					{
 						xtype: 'button',
-						iconCls: 'home',
-						align: 'left',
+						iconCls: 'user',
+						//align: 'left',
+						itemID: 'menuBtn',
+						action: 'callMenu'
+					},
+					{
+						xtype: 'spacer',
+						width: (window.innerWidth /2) - 134
+					},
+					{
+						xtype: 'button',
+						text: 'CBCM Media Player',
+						
 						itemID: 'homeBtn',
-						action: 'callHome',
+						action: 'callHome'
 					},
 					//search button
 					{

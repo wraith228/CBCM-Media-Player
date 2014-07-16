@@ -17,11 +17,17 @@ Ext.define('MyApp.controller.Search', {
 				clearicontap : 'onClearSearch',
 				keyup: 'onSearchKeyUp'
 			},
+			'button[action=callMenu]': {
+				tap: 'menuPop'
+			},
+			'button[action=callHelp]': {
+				tap: 'helpPop'
+			},
 			'button[action=callSearch]': {
 				tap: 'searchPop'
 			},
-			'button[action=callInfo]': {
-				tap: 'infoPop'
+			'button[action=callSettings]': {
+				tap: 'settingsPop'
 			},
 			'button[action=callHome]': {
 				tap: 'goHome'
@@ -29,8 +35,8 @@ Ext.define('MyApp.controller.Search', {
 			'button[action=callPopular]': {
 				tap: 'popularSort'
 			},
-			'button[action=callRec]': {
-				tap: 'recSort'
+			'button[action=callLive]': {
+				tap: 'callLive'
 			},
 			'button[action=callAdded]': {
 				tap: 'addedSort'
@@ -117,11 +123,10 @@ Ext.define('MyApp.controller.Search', {
 			}
 		}];
 		store.sort(popSorter);
-
 	},
 	
-	//category store sort function
-	recSort: function() {
+	//livestreams call
+	liveCall: function() {
 		var store = Ext.getStore('Videos');		
 		//store.sort();
 	},
@@ -137,6 +142,16 @@ Ext.define('MyApp.controller.Search', {
 		console.log('Controller initialized');
 	},
 	
+	//menu overlay function
+	menuPop: function(menuPanel) {
+		var menuPanel = Ext.Viewport.down('menuPanel');
+		if (!menuPanel) {
+			menuPanel = Ext.widget('menuPanel');
+		}
+		menuPanel.reset();
+		menuPanel.showBy(menuPanel, 'tr-br?');
+	},
+	
 	//search bar overlay function
 	searchPop: function(searchPanel) {
 		var searchPanel = Ext.Viewport.down('searchPanel');
@@ -147,9 +162,17 @@ Ext.define('MyApp.controller.Search', {
 		searchPanel.showBy(searchPanel, 'bl-tl?');
 	},
 
-	//info overlay function
-	infoPop: function() {
-		var infoOverlay = Ext.create('MyApp.view.InfoPanel');
-		infoOverlay.show();
+	//settings view function
+	settingsPop: function() {
+		Ext.Viewport.down('menuPanel').hide();
+		Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);  
+		Ext.Viewport.setActiveItem(Ext.widget('settingsPanel'));
+	},
+	
+	//help view function
+	helpPop: function() {
+		Ext.Viewport.down('menuPanel').hide();
+		Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);  
+		Ext.Viewport.setActiveItem(Ext.widget('helpPanel'));
 	}
 });
