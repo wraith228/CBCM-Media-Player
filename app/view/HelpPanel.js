@@ -4,66 +4,147 @@ Ext.define('MyApp.view.HelpPanel', {
     alias : 'widget.helpPanel',
  
     config: {
-		layout: 'fit',         
+		xtype: 'panel',
+		layout: 'vbox',         
 		items: [
-			//titlebar code
+			//menu code
 			{
 				xtype: 'titlebar',
+				baseCls: 'titleBar',
 				docked: 'top',
 				id: 'cbcmTitle',
-				//title: 'CBCM Media Player',
+				height: 50,
 				
 				items: [
 					//menu button
 					{
 						xtype: 'button',
-						iconCls: 'user',
-						//align: 'left',
+						baseCls: 'moreBtn',
 						itemID: 'menuBtn',
-						action: 'callMenu'
+						action: 'callMenu',
+						align: 'left',
+
 					},
-					{
-						xtype: 'spacer',
-						width: (window.innerWidth /2) - 134
-					},
-					{
-						xtype: 'button',
-						text: 'CBCM Media Player',
-						
-						itemID: 'homeBtn',
-						action: 'callHome'
-					},
+											
 					//search button
 					{
+
 						xtype: 'button',
-						iconCls: 'search',
-						align: 'right',
+						baseCls: 'searchBtn',
 						itemId: 'searchBtn',
-						action: 'callSearch'
+						action: 'callSearch',
+						align: 'right'
+					},
+					//home button
+					{
+						xtype: 'button',
+						baseCls: 'homeBtn',
+						itemId: 'homeBtn',
+						action: 'callHome',
+						align: 'left'
+					},
+				]
+			},
+			{
+				xtype: 'panel',
+				id: 'dropMenu',
+				hidden: true,
+				items: [
+					
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'liveBtn',
+							 width: window.innerWidth
+							}
+						]
+					},
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'favoritesBtn',
+							 width: window.innerWidth
+							}
+						]
+					},
+					{
+						xtype: 'toolbar',
+						baseCls: 'sepBar'
+					},
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'settingsBtn',
+							 width: window.innerWidth,
+							 action: 'callSettings'
+							}
+						]
+					},
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'helpBtnUsed',
+							 width: window.innerWidth,
+							 
+							}
+						]
 					}
 				]
 			},
 			{
 				xtype: 'toolbar',
-				docked: 'top',
-			},
-			{
-				layout: {
-					type: 'vbox',
-					align: 'center',
-					pack: 'center'
-				},		
+				baseClas: 'titlebar',
+				id: 'searchBar',
+				hidden: true,
 				items: [
 					{
-						xtype: 'panel',
-						
-						items: [
-							{
-								html: 'help',
-							}
-						]
+						xtype: 'spacer',
+						width: 10
+					},
+					{
+						xtype: 'searchfield',
+						placeHolder: 'Search...',
+						itemId: 'searchBox',
+						width: window.innerWidth - 20,
 					}
 				]
+			},
+			{
+				xtype: 'panel',				
+				height: 35,
+				baseCls: 'popBar'
+			},
+			/*
+			{
+				xtype: 'toolbar',
+				docked: 'top',
+				title: 'Settings',
+				items: [
+					{
+						xtype: 'button',
+						iconCls: 'arrow_left',
+						action: 'goBack',
+						align: 'left'
+
+					}
+				]
+			},
+			*/
+			{
+				xtype: 'panel',
+				html: 'help'
 			}
 		]
     }
