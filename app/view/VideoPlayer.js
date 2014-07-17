@@ -1,78 +1,133 @@
     Ext.define('MyApp.view.VideoPlayer', {
-		extend: 'Ext.Container',
+		extend: 'Ext.form.Panel',
 		alias: 'widget.videoPanel',
 		config: {		
-			layout: 'fit',         
+			xtype: 'panel',
+			layout: 'vbox',       
 			items: [
-				//titlebar code
+				//menu code
 				{
 					xtype: 'titlebar',
+					baseCls: 'titleBar',
 					docked: 'top',
 					id: 'cbcmTitle',
-					title: 'CBCM Media Player',
+					height: 50,
+					
 					items: [
+						//menu button
+						{
+							xtype: 'button',
+							baseCls: 'moreBtn',
+							itemID: 'menuBtn',
+							action: 'callMenu',
+							align: 'left',
+
+						},
+												
+						//search button
+						{
+
+							xtype: 'button',
+							baseCls: 'searchBtn',
+							itemId: 'searchBtn',
+							action: 'callSearch',
+							align: 'right'
+						},
 						//home button
 						{
 							xtype: 'button',
-							iconCls: 'home',
-							align: 'left',
-							itemID: 'homeBtn',
+							baseCls: 'homeBtn',
+							itemId: 'homeBtn',
 							action: 'callHome',
+							align: 'left'
 						},
-						//search button
+					]
+				},
+				{
+					xtype: 'panel',
+					id: 'dropMenu',
+					hidden: true,
+					items: [
+						
 						{
-							xtype: 'button',
-							iconCls: 'search',
-							align: 'right',
-							itemId: 'searchBtn',
-							action: 'callSearch'
+							xtype: 'toolbar',
+							baseCls: 'titleBar',
+							items: [
+								{
+								 xtype: 'button',
+								 baseCls: 'liveBtn',
+								 width: window.innerWidth
+								}
+							]
+						},
+						{
+							xtype: 'toolbar',
+							baseCls: 'titleBar',
+							items: [
+								{
+								 xtype: 'button',
+								 baseCls: 'favoritesBtn',
+								 width: window.innerWidth
+								}
+							]
+						},
+						{
+							xtype: 'toolbar',
+							baseCls: 'sepBar'
+						},
+						{
+							xtype: 'toolbar',
+							baseCls: 'titleBar',
+							items: [
+								{
+								 xtype: 'button',
+								 baseCls: 'settingsBtn',
+								 width: window.innerWidth,
+								 action: 'callSettings'
+								}
+							]
+						},
+						{
+							xtype: 'toolbar',
+							baseCls: 'titleBar',
+							items: [
+								{
+								 xtype: 'button',
+								 baseCls: 'helpBtn',
+								 width: window.innerWidth,
+								 action: 'callHelp'
+								}
+							]
 						}
 					]
 				},
 				{
-				xtype: 'toolbar',
-				docked: 'top',
-				},
-				/*
-				{
-					xtype: 'panel',
-					flex: 1,
-					items: [{
-						xtype: 'video',
-						url: 'http://webapps.figleaf.com/arch101/friends.mp4',
-						autoPause: true,
-						autoResume: true,
-						enableControls: true,
-						preload: true,
-						posterUrl: 'http://webapps.figleaf.com/arch101/friends.png',
-						layout: {
-							type: 'vbox',
-							fullscreen: true,
+					xtype: 'toolbar',
+					baseClas: 'titlebar',
+					id: 'searchBar',
+					hidden: true,
+					items: [
+						{
+							xtype: 'spacer',
+							width: 10
 						},
-						
-						//comment out
-						if (!this.getEnableControls() || Ext.os.is.Android) {
-							this.add({
-								xtype: 'button',
-								text: 'Play Video',
-								handler: function(b,e) {
-									var video = this.getParent().down('video');
-									if (video.isPlaying()) {
-										video.pause();
-										b.setText('Play Video');
-									} else {
-										video.play();
-										b.setText('Pause Video');
-									}
-								}
-							})
+						{
+							xtype: 'searchfield',
+							placeHolder: 'Search...',
+							itemId: 'searchBox',
+							width: window.innerWidth - 20,
 						}
-						
-					}],
-					
+					]
 				},
-				*/
-			]
-			
+				{
+					xtype: 'panel',				
+					height: 35,
+					baseCls: 'popBar'
+				},
+				{
+					xtype:'panel'
+					//Video player layout code goes here
+				}
+			]			
 		}
     }); 

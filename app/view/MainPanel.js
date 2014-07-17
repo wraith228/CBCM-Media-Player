@@ -2,84 +2,136 @@ Ext.define('MyApp.view.MainPanel', {
     extend: 'Ext.Panel',
     alias : 'widget.mainPanel',
  
-    config: {		
-		layout: 'fit',         
+    config: {
+		xtype: 'panel',
+		layout: 'vbox',         
 		items: [
-			//main titlebar code
+			//menu code
 			{
 				xtype: 'titlebar',
+				baseCls: 'titleBar',
 				docked: 'top',
 				id: 'cbcmTitle',
-				//title: 'CBCM Media Player',
+				height: 50,
 				
 				items: [
 					//menu button
 					{
 						xtype: 'button',
-						iconCls: 'user',
-						//align: 'left',
+						baseCls: 'moreBtn',
 						itemID: 'menuBtn',
-						action: 'callMenu'
+						action: 'callMenu',
+						align: 'left',
+
 					},
-					{
-						xtype: 'spacer',
-						width: (window.innerWidth /2) - 134
-					},
-					{
-						xtype: 'button',
-						text: 'CBCM Media Player',
-						
-						itemID: 'homeBtn',
-						action: 'callHome'
-					},
+											
 					//search button
 					{
+
 						xtype: 'button',
-						iconCls: 'search',
-						align: 'right',
+						baseCls: 'searchBtn',
 						itemId: 'searchBtn',
-						action: 'callSearch'
+						action: 'callSearch',
+						align: 'right'
+					},
+					//home button
+					{
+						xtype: 'button',
+						baseCls: 'homeBtn',
+						itemId: 'homeBtn',
+						action: 'closeMenu',
+						align: 'left'
+					},
+				]
+			},
+			{
+				xtype: 'panel',
+				id: 'dropMenu',
+				hidden: true,
+				items: [
+					
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'liveBtn',
+							 width: window.innerWidth
+							}
+						]
+					},
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'favoritesBtn',
+							 width: window.innerWidth
+							}
+						]
+					},
+					{
+						xtype: 'toolbar',
+						baseCls: 'sepBar'
+					},
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'settingsBtn',
+							 width: window.innerWidth,
+							 action: 'callSettings'
+							}
+						]
+					},
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'helpBtn',
+							 width: window.innerWidth,
+							 action: 'callHelp'
+							}
+						]
 					}
 				]
 			},
-			//Main store select buttons code
 			{
 				xtype: 'toolbar',
-				docked: 'top',
-				layout:{
-					type: 'hbox',
-					pack: 'center'
-				},
-				defaults: {
-					xtype: 'button',
-					flex: 1,
-				},				
+				baseClas: 'titlebar',
+				id: 'searchBar',
+				hidden: true,
 				items: [
-					//popular button
 					{
-						id: 'popularBtn',
-						text: 'Popular',
-						action: 'callPopular'
+						xtype: 'spacer',
+						width: 10
 					},
-					//upload date button
 					{
-						id: 'dateBtn',
-						text: 'Upload Date',
-						action: 'callAdded'
-					},
-					//categories button
-					{
-						id: 'liveBtn',
-						text: 'Livestreams',
-						action: 'callLive'
+						xtype: 'searchfield',
+						placeHolder: 'Search...',
+						itemId: 'searchBox',
+						width: window.innerWidth - 20,
 					}
-				]				
+				]
+			},
+			{
+				xtype: 'panel',				
+				height: 35,
+				baseCls: 'popBar'
 			},
 			//Videos store list code
 			{
                 xtype: 'list',
                 store : 'Videos',
 				action: 'getLink',
+				flex: 1,
+				height: 'auto',
 				itemTpl: [
 					'<table>',
 						'<tr>',
@@ -91,6 +143,6 @@ Ext.define('MyApp.view.MainPanel', {
 				],
 				emptyText: '<div class="Content">No Matching Videos</div>',
             },
-		]  
+		] 
     }
 });

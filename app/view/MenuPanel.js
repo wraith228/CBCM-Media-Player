@@ -3,83 +3,108 @@ Ext.define('MyApp.view.MenuPanel', {
     extend: 'Ext.form.Panel',
     alias : 'widget.menuPanel',
  
-    config: {		
-		layout: 'fit',
-		modal: true,
-		hideOnMaskTap: true,
-		//top: 0,	
-		
-		showAnimation: {
-			type: 'slideIn',
-			direction: 'right'
-		},
-		hideAnimation: {
-			type: 'slideOut',
-			direction: 'left',
-		},
-				
+    config: {
+		xtype: 'panel',
+		layout: 'hbox',
+		top: 0,			
 		items: [
 			{
 				xtype: 'panel',
 				docked: 'left',
-				width: 300,
-				height: window.innerHeight -7,	
+				width: 200,
 				
 				items: [
+					//menu button
+					{
+						xtype: 'toolbar',
+						docked: 'top',
+						//title: 'CBCM',
+						items: [
+							{
+							xtype: 'button',
+							baseCls: 'moreBtn',
+							itemID: 'menuBtn',
+							action: 'closeMenu',
+							},
+							{
+								xtype: 'panel',
+								//html: 'CBCM',
+							}
+						]
+					},
 					{
 						xtype: 'toolbar',
 						docked: 'top',
 						
 						items: [
 							{
-								xtype: 'button',
-								text: 'Settings',
-								align: 'right',
-								itemID: 'settingsBtn',
-								action: 'callSettings',
-								width: 300,
+								xtype: 'spacer',
+								width: 10
+							},
+							{
+								xtype: 'searchfield',
+								placeHolder: 'Search...',
+								itemId: 'searchBox',
+								align: 'center',
+								width: 180
 							}
 						]
 					},
 					{
 						xtype: 'toolbar',
 						docked: 'top',
+						layout: 'fit',
 						items: [
 							{
-								xtype: 'button',
-								text: 'Playlists',
-								align: 'right',
-								itemID: 'playlistBtn',
-								action: 'callPlaylists',
-								width: 300,
+								iconCls: 'home',
+								text: 'Home',
+								action: 'callHome',
 							}
 						]
 					},
 					{
 						xtype: 'toolbar',
-						docked: 'top',						
+						docked: 'top',
+						layout: 'fit',						
 						items: [
 							{
-								xtype: 'button',
+								iconCls: 'action',
+								text: 'Livestreams'
+							}
+						]
+					},
+					{
+						xtype: 'toolbar',
+						docked: 'top',
+						layout: 'fit',
+						items: [
+							{
+								iconCls: 'favorites',
+								text: 'Playlist'
+							}
+						]
+					},
+					{
+						xtype: 'toolbar',
+						docked: 'top',
+						layout: 'fit',
+						items: [
+							{
+								iconCls: 'settings',
+								text: 'Settings',
+								action: 'callSettings',
+							}
+						]
+					},
+					{
+						xtype: 'toolbar',
+						docked: 'top',
+						layout: 'fit',
+						items: [
+							{
+								iconCls: 'info',
 								text: 'Help',
-								align: 'right',
-								itemID: 'helpBtn',
 								action: 'callHelp',
-								width: 300,
-							}
-						]
-					},
-					{
-						xtype: 'toolbar',
-						docked: 'top',						
-						items: [
-							{
-								xtype: 'button',
-								text: 'Privacy & Terms',
-								align: 'right',
-								itemID: 'privacyBtn',
-								action: 'callPrivacy',
-								width: 300,
 							}
 						]
 					},
