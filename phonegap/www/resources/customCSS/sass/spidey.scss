@@ -1,0 +1,131 @@
+@import 'sencha-touch/default/all';
+    
+    $alternative-color: #134780;
+    $base-color: #d6371a;
+    $confirm-color: #799D54;
+    $alert-color: #B0886D;
+    $neutral-color: $base-color;
+    $active-color: darken($base-color, 20%);
+   
+    // GRADIENTS
+    //$base-gradient: 'matte';
+    
+    // LISTS
+    $list-color: darken($active-color, 20%);
+    $list-active-color: transparentize($active-color, .2);
+    $list-active-gradient: 'recessed';
+    $list-header-bg-color: darken($alternative-color, 10%);
+    $list-pressed-color: lighten($list-active-color, 10%);
+    $basic-slider: true;
+
+    // TABS
+    $tabs-dark: transparentize($alternative-color, 1.0); // This sets the tab selection to transparent
+    $tabs-dark-color: #fff;
+    $tabs-bottom-active-gradient: color-stops(darken($alternative-color, 25%), darken($alternative-color, 35%));  // This sets the color for the "bottom" tab icons and gradient
+    $tabs-bar-gradient: color-stops(lighten($alternative-color, 10%), darken($alternative-color, 25%));
+    $tabs-bottom-icon-size: 32px;
+    $tabs-bottom-inactive-gradient: color-stops(red, blue);
+    
+    // TOOLBARS
+    $toolbar-gradient: color-stops(darken($active-color, 15%), darken($active-color, 1%));
+
+    
+// You may remove any of the following modules that you
+// do not use in order to create a smaller css file.
+@include sencha-panel;
+@include sencha-buttons;
+@include sencha-sheet;
+@include sencha-picker;
+@include sencha-tabs;
+@include sencha-toolbar;
+@include sencha-toolbar-forms;
+@include sencha-indexbar;
+@include sencha-list;
+@include sencha-layout;
+@include sencha-carousel;
+@include sencha-form;
+@include sencha-msgbox;
+
+/**
+ * Includes a base64-encoded icon for use within tab bars and buttons (With the component parameter iconMask: true).
+ *
+ *     @include pictos-iconmask('attachment');
+ *
+ * @param {string} $name The name of the icon to be included. This is to match the name of the icon file (located at resources/themes/images/default/pictos) without its extention (.png).
+ */
+@mixin custom-iconmask($name) {
+  .x-tab .x-button-icon.#{$name},
+  .x-button .x-button-icon.x-icon-mask.#{$name} {
+    -webkit-mask-image: image-url($name + ".png");
+  }
+}
+
+@include custom-iconmask('icon_spider');
+@include custom-iconmask('icon_spidey');
+@include custom-iconmask('icon_web');
+
+@include font-face("Spidey",font-files("the_amazing_spider-man.ttf",
+                      "the_amazing_spider-man.eot",
+                      "the_amazing_spider-man.svg",
+                      "the_amazing_spider-man.woff"));
+                      
+@mixin font-spidey {
+    font-family: 'Spidey';
+    text-transform: uppercase;
+}
+
+body {
+  @include font-spidey;
+
+
+  .x-layout-card-item, .x-form .x-scroll-container {
+    @include background-image(image-url('background.png'));
+      background-size: cover;
+      background-color: $base-color;
+  }
+
+}
+
+  .x-tabbar-dark {
+    &.x-docked-bottom {
+      .x-tab {
+        color: lighten($alternative-color, 80%);
+        .x-button-icon {
+          @include background-image(linear-gradient(lighten($alternative-color, 50%),lighten($alternative-color, 80%)));
+        }
+      }
+      
+      .x-button-label {
+        text-shadow: none;
+      }
+      .x-tab-active {
+        color: lighten($alternative-color, 20%);
+        .x-button-icon {
+          @include background-image(linear-gradient(lighten($alternative-color, 20%),lighten($alternative-color, 20%)));
+        }
+      }
+    }
+    
+  }
+  
+  .x-tabbar-neutral {
+    &.x-docked-top{
+      .x-button-label {
+        color: darken($active-color, 10%);
+        @include bevel-text('highlight');
+      }
+      .x-tab-active {
+        @include background-image(linear-gradient($active-color, lighten($active-color, 30%)));
+        .x-button-label {
+          color: lighten($base-color, 30%);
+          @include bevel-text('shadow');
+        }
+      }
+    }
+  }
+  
+  // FORMS
+  .x-toolbar .x-field-search .x-component-outer, .x-toolbar .x-field-select .x-component-outer, .x-toolbar .x-field-text .x-component-outer {
+    border: 1px solid darken($active-color, 10%);
+  }
+  

@@ -11,16 +11,19 @@ Ext.define('MyApp.controller.Menu', {
 		},
 		control: {
 			'button[action=callMenu]': {
-				tap: 'menuPop'
+				tap: 'menuDrop'
 			},
 			'button[action=callSearch]': {
-				tap: 'searchPop'
+				tap: 'searchDrop'
+			},
+			'panel[action=callSelect]': {
+				itemtap: 'selectDrop'
 			},
 		} 
 	},
 	
-	//menu overlay function
-	menuPop: function() {
+	//menu drop function
+	menuDrop: function() {
 		var menu = Ext.getCmp('dropMenu');
 		if (menu.isHidden()) {
 			menu.show();
@@ -29,14 +32,27 @@ Ext.define('MyApp.controller.Menu', {
 			menu.hide();
 		}
 	},
-
-	searchPop: function() {
+	//searchfield drop function
+	searchDrop: function() {
 		var search = Ext.getCmp('searchBar');
 		if (search.isHidden()) {
 			search.show();
 		}	
 		else {
 			search.hide();
+		}
+	},
+	//selectfields drop function
+	selectDrop: function() {
+		var select = Ext.getCmp('selectDrop');
+		var button = Ext.getCmp('filterBtn');
+		if (select.isHidden()) {
+			select.show();
+			button.setCls('arrowDownBtn');
+		}	
+		else {
+			select.hide();
+			button.setCls('arrowBtn');
 		}
 	}
 });

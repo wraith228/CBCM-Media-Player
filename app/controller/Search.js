@@ -13,9 +13,8 @@ Ext.define('MyApp.controller.Search', {
 			'mainPanel': {
 				activate: 'onActivate'
 			},
-			'searchPanel searchfield[itemId=searchBox]' : {
-				clearicontap : 'onClearSearch',
-				keyup: 'onSearchKeyUp'
+			'searchfield' : {
+				newSearch : 'onNewSearch'
 			},
 			
 			'button[action=callHelp]': {
@@ -58,10 +57,10 @@ Ext.define('MyApp.controller.Search', {
 	},
 	
 	//search function
-	onSearchKeyUp: function(searchField) {
+	onNewSearch: function(searchField) {
+		queryString = searchField.getValue();
 		Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);  
 		Ext.Viewport.setActiveItem(Ext.widget('resultsPanel'));
-		queryString = searchField.getValue();
 		searchGlobal = queryString;
 		console.log(this,'Searching by: ' + queryString);
 		
@@ -96,6 +95,7 @@ Ext.define('MyApp.controller.Search', {
 	
 	//go home function
 	goHome: function() {
+		console.log('Home');
 		var menuPanel = Ext.Viewport.down('menuPanel');
 		if (menuPanel) {
 			menuPanel.hide();
@@ -109,7 +109,13 @@ Ext.define('MyApp.controller.Search', {
 	
 	//popularity store sort function
 	popularSort: function() {
+		var category = Ext.getCmp('catPanel');
+		category.setCls('popularPanel');
 		var store = Ext.getStore('Videos');
+		var catMenu = Ext.getCmp('categoryDrop');
+		catMenu.hide();
+		var button = Ext.getCmp('catBtn');
+		button.setCls('arrowBtn');	
 		var popSorter = [{
 			sorterFn: function(video1, video2) {
 			
@@ -137,7 +143,13 @@ Ext.define('MyApp.controller.Search', {
 	
 	//date store sort function
 	addedSort: function() {
-		var store = Ext.getStore('Videos');		
+		var category = Ext.getCmp('catPanel');
+		var catMenu = Ext.getCmp('categoryDrop');
+		var store = Ext.getStore('Videos');
+		var button = Ext.getCmp('catBtn');
+		button.setCls('arrowBtn');		
+		catMenu.hide();
+		category.setCls('recentPanel');	
 		store.sort('postDate', 'DESC');
 	},
 	
@@ -145,7 +157,6 @@ Ext.define('MyApp.controller.Search', {
 	init: function() {
 		console.log('Controller initialized');
 	},
-	
 	
 	
 	//search bar overlay function
@@ -181,8 +192,6 @@ Ext.define('MyApp.controller.Search', {
 		//Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
 		Ext.Viewport.setActiveItem(Ext.widget('helpPanel'));
 	},
-	
-	
 	
 	goBack: function() {
 		history.back();

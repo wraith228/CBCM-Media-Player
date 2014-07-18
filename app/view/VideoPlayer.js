@@ -44,6 +44,30 @@
 					]
 				},
 				{
+				xtype: 'toolbar',
+				baseCls: 'titlebar',
+				id: 'searchBar',
+				hidden: true,
+				layout: 'hbox',
+				style: 'background:#313131;',
+				items: [
+					{
+						xtype: 'spacer',
+						width: 10
+					},
+					{
+						xtype: 'searchfield',
+						placeHolder: 'Search...',
+						itemId: 'searchBox',
+						flex: 1
+					},
+					{
+						xtype: 'spacer',
+						width: 10
+					},
+				]
+			},
+				{
 					xtype: 'panel',
 					id: 'dropMenu',
 					hidden: true,
@@ -56,7 +80,7 @@
 								{
 								 xtype: 'button',
 								 baseCls: 'liveBtn',
-								 width: window.innerWidth
+								 flex: 1
 								}
 							]
 						},
@@ -67,7 +91,7 @@
 								{
 								 xtype: 'button',
 								 baseCls: 'favoritesBtn',
-								 width: window.innerWidth
+								 flex: 1
 								}
 							]
 						},
@@ -82,8 +106,8 @@
 								{
 								 xtype: 'button',
 								 baseCls: 'settingsBtn',
-								 width: window.innerWidth,
-								 action: 'callSettings'
+								 action: 'callSettings',
+								 flex: 1
 								}
 							]
 						},
@@ -94,28 +118,10 @@
 								{
 								 xtype: 'button',
 								 baseCls: 'helpBtn',
-								 width: window.innerWidth,
-								 action: 'callHelp'
+								 action: 'callHelp',
+								 flex: 1
 								}
 							]
-						}
-					]
-				},
-				{
-					xtype: 'toolbar',
-					baseClas: 'titlebar',
-					id: 'searchBar',
-					hidden: true,
-					items: [
-						{
-							xtype: 'spacer',
-							width: 10
-						},
-						{
-							xtype: 'searchfield',
-							placeHolder: 'Search...',
-							itemId: 'searchBox',
-							width: window.innerWidth - 20,
 						}
 					]
 				},
