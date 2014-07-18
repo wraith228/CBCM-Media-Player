@@ -667,13 +667,17 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.viewport.WindowsPhone": [
     "Ext.viewport.WP"
   ],
+  "MyApp.controller.Menu": [],
   "MyApp.controller.Search": [],
   "MyApp.model.Video": [],
   "MyApp.store.Videos": [],
-  "MyApp.view.InfoPanel": [],
+  "MyApp.view.HelpPanel": [],
   "MyApp.view.MainPanel": [],
+  "MyApp.view.MenuPanel": [],
   "MyApp.view.ResultsPanel": [],
-  "MyApp.view.SearchPanel": []
+  "MyApp.view.SearchPanel": [],
+  "MyApp.view.SettingsPanel": [],
+  "MyApp.view.VideoPlayer": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.AbstractComponent": [],
@@ -1392,20 +1396,30 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Ios": [],
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
+  "MyApp.controller.Menu": [],
   "MyApp.controller.Search": [],
   "MyApp.model.Video": [],
   "MyApp.store.Videos": [],
-  "MyApp.view.InfoPanel": [
-    "widget.infoPanel"
+  "MyApp.view.HelpPanel": [
+    "widget.helpPanel"
   ],
   "MyApp.view.MainPanel": [
     "widget.mainPanel"
+  ],
+  "MyApp.view.MenuPanel": [
+    "widget.menuPanel"
   ],
   "MyApp.view.ResultsPanel": [
     "widget.resultsPanel"
   ],
   "MyApp.view.SearchPanel": [
     "widget.searchPanel"
+  ],
+  "MyApp.view.SettingsPanel": [
+    "widget.settingsPanel"
+  ],
+  "MyApp.view.VideoPlayer": [
+    "widget.videoPanel"
   ]
 });
 

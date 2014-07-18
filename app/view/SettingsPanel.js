@@ -45,6 +45,36 @@ Ext.define('MyApp.view.SettingsPanel', {
 					},
 				]
 			},
+			//search field drop-down
+			{
+				xtype: 'toolbar',
+				baseCls: 'titlebar',
+				id: 'searchBar',
+				hidden: true,
+				layout: 'hbox',
+				style: 'background:#313131;',
+				items: [
+					{
+						xtype: 'spacer',
+						width: 10
+					},
+					{
+						xtype: 'searchfield',
+						placeHolder: 'Search...',
+						//itemId: 'searchBox',
+						flex: 1,
+						listeners : {
+							action: function() {
+								this.fireEvent('newSearch', this);
+							}
+                        }
+					},
+					{
+						xtype: 'spacer',
+						width: 10
+					},
+				]
+			},
 			{
 				xtype: 'panel',
 				id: 'dropMenu',
@@ -58,7 +88,7 @@ Ext.define('MyApp.view.SettingsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'liveBtn',
-							 width: window.innerWidth
+							 flex: 1
 							}
 						]
 					},
@@ -69,7 +99,7 @@ Ext.define('MyApp.view.SettingsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'favoritesBtn',
-							 width: window.innerWidth
+							 flex: 1
 							}
 						]
 					},
@@ -84,7 +114,7 @@ Ext.define('MyApp.view.SettingsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'settingsBtnUsed',
-							 width: window.innerWidth
+							 flex: 1,
 							}
 						]
 					},
@@ -95,28 +125,10 @@ Ext.define('MyApp.view.SettingsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'helpBtn',
-							 width: window.innerWidth,
+							 flex: 1,
 							 action: 'callHelp'
 							}
 						]
-					}
-				]
-			},
-			{
-				xtype: 'toolbar',
-				baseClas: 'titlebar',
-				id: 'searchBar',
-				hidden: true,
-				items: [
-					{
-						xtype: 'spacer',
-						width: 10
-					},
-					{
-						xtype: 'searchfield',
-						placeHolder: 'Search...',
-						itemId: 'searchBox',
-						width: window.innerWidth - 20,
 					}
 				]
 			},

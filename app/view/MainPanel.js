@@ -39,74 +39,18 @@ Ext.define('MyApp.view.MainPanel', {
 						xtype: 'button',
 						baseCls: 'homeBtn',
 						itemId: 'homeBtn',
-						action: 'closeMenu',
 						align: 'left'
 					},
 				]
 			},
-			{
-				xtype: 'panel',
-				id: 'dropMenu',
-				hidden: true,
-				items: [
-					
-					{
-						xtype: 'toolbar',
-						baseCls: 'titleBar',
-						items: [
-							{
-							 xtype: 'button',
-							 baseCls: 'liveBtn',
-							 width: window.innerWidth
-							}
-						]
-					},
-					{
-						xtype: 'toolbar',
-						baseCls: 'titleBar',
-						items: [
-							{
-							 xtype: 'button',
-							 baseCls: 'favoritesBtn',
-							 width: window.innerWidth
-							}
-						]
-					},
-					{
-						xtype: 'toolbar',
-						baseCls: 'sepBar'
-					},
-					{
-						xtype: 'toolbar',
-						baseCls: 'titleBar',
-						items: [
-							{
-							 xtype: 'button',
-							 baseCls: 'settingsBtn',
-							 width: window.innerWidth,
-							 action: 'callSettings'
-							}
-						]
-					},
-					{
-						xtype: 'toolbar',
-						baseCls: 'titleBar',
-						items: [
-							{
-							 xtype: 'button',
-							 baseCls: 'helpBtn',
-							 width: window.innerWidth,
-							 action: 'callHelp'
-							}
-						]
-					}
-				]
-			},
+			//search field drop-down
 			{
 				xtype: 'toolbar',
-				baseClas: 'titlebar',
+				baseCls: 'titlebar',
 				id: 'searchBar',
 				hidden: true,
+				layout: 'hbox',
+				style: 'background:#313131;',
 				items: [
 					{
 						xtype: 'spacer',
@@ -115,16 +59,161 @@ Ext.define('MyApp.view.MainPanel', {
 					{
 						xtype: 'searchfield',
 						placeHolder: 'Search...',
-						itemId: 'searchBox',
-						width: window.innerWidth - 20,
+						//itemId: 'searchBox',
+						flex: 1,
+						listeners : {
+							action: function() {
+								this.fireEvent('newSearch', this);
+							}
+                        }
+					},
+					{
+						xtype: 'spacer',
+						width: 10
+					},
+				]
+			},
+			//menu drop-down
+			{
+				xtype: 'panel',
+				id: 'dropMenu',
+				hidden: true,
+				items: [
+					//livestream button
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'liveBtn',
+							 flex: 1
+							}
+						]
+					},
+					//playlist button
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'favoritesBtn',
+							 flex: 1
+							}
+						]
+					},
+					{
+						xtype: 'toolbar',
+						baseCls: 'sepBar'
+					},
+					//settings button
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'settingsBtn',
+							 action: 'callSettings',
+							 flex: 1
+							}
+						]
+					},
+					//help button
+					{
+						xtype: 'toolbar',
+						baseCls: 'titleBar',
+						items: [
+							{
+							 xtype: 'button',
+							 baseCls: 'helpBtn',
+							 action: 'callHelp',
+							 flex: 1
+							}
+						]
 					}
 				]
 			},
+			//category menu
 			{
 				xtype: 'panel',				
 				height: 35,
-				baseCls: 'popBar'
+				style: 'background:#2b5b8e;',
+				action: 'callSelect',
+				layout: 'hbox',
+				items: [
+					{
+						xtype: 'panel',
+						baseCls: 'popularPanel',
+						align: 'left',
+						id: 'catPanel',
+						height: 35
+					},
+					{
+						xtype: 'panel',
+						flex: 1,
+						style: 'background:#2b5b8e;',
+					},
+					{
+						xtype: 'panel',
+						baseCls: 'arrowBtn',
+						id: 'catBtn',
+						align: 'right',
+					}
+				],
+				listeners: {
+					initialize: function() {
+						this.element.on({
+							tap: function() {
+								var category = Ext.getCmp('categoryDrop');
+								var button = Ext.getCmp('catBtn');
+								if (category.isHidden()) {
+									category.show();
+									button.setCls('arrowDownBtn');
+								}	
+								else {
+									category.hide();
+									button.setCls('arrowBtn');
+								}
+							}
+						})
+					}
+				}
 			},
+			{
+				xtype: 'panel',
+				hidden: true,
+				id: 'categoryDrop',
+				items: [
+					{
+						xtype: 'toolbar',
+						height: 35,
+						style: 'background:#313131;',
+						items: [
+							{
+								xtype: 'button',
+								baseCls: 'popBtn',
+								flex: 1,
+								action: 'callPopular',
+							},
+						]
+					},
+					{
+						xtype: 'toolbar',
+						height: 35,
+						style: 'background:#313131;',
+						items: [
+							{
+								xtype: 'button',
+								baseCls: 'recentBtn',
+								flex: 1,
+								action: 'callAdded',
+							},
+						]
+					},
+				]
+			},		
 			//Videos store list code
 			{
                 xtype: 'list',
