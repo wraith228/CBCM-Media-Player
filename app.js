@@ -12,13 +12,13 @@ Ext.application({
  speakFilt: 'string',
  
  requires: [
-               'MyApp.view.MainPanel', 'MyApp.view.SearchPanel', 'MyApp.view.ResultsPanel', 
-			   'MyApp.view.VideoPlayer', 'MyApp.view.SettingsPanel', 'MyApp.view.MenuPanel',
-			   'MyApp.view.HelpPanel',
-               ],
+               'MyApp.view.MainPanel', 'MyApp.view.ResultsPanel', 'MyApp.view.VideoPlayer', 
+			   'MyApp.view.SettingsPanel', 'MyApp.view.HelpPanel', 'MyApp.view.LivePanel',
+			   'MyApp.view.PlaylistPanel',
+           ],
                 
-    views : ['MainPanel', 'SearchPanel', 'ResultsPanel', 'VideoPlayer', 'SettingsPanel', 'MenuPanel','HelpPanel',],          
-    controllers: ['Search', 'Menu'],
+    views : ['MainPanel', 'ResultsPanel', 'VideoPlayer', 'SettingsPanel', 'HelpPanel', 'PlaylistPanel', 'LivePanel'],          
+    controllers: ['Processes', 'Menu', 'Navigation'],
      
     launch: function() {
      console.log('Application launch');

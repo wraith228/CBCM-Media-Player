@@ -4,9 +4,11 @@ Ext.define('MyApp.view.ResultsPanel', {
  
     config: {		
 		xtype: 'panel',
-		layout: 'vbox',         
+		layout: 'vbox',
+		style: 'background:#f2f2f2;',
+		flex: 1,
 		items: [
-			//menu code
+			//menu
 			{
 				xtype: 'titlebar',
 				baseCls: 'titleBar',
@@ -39,8 +41,16 @@ Ext.define('MyApp.view.ResultsPanel', {
 						xtype: 'button',
 						baseCls: 'homeBtn',
 						itemId: 'homeBtn',
-						action: 'callHome',
-						align: 'left'
+						//action: 'callHome',
+						align: 'left',
+						//bug test
+						handler: function() {
+							console.log('Home');
+							Ext.Viewport.setActiveItem(Ext.widget('mainPanel'));
+							var store = Ext.getStore('Videos');
+							store.clearFilter();
+							MyApp.app.getController('Processes').popularSort();
+						}
 					},
 				]
 			},
@@ -74,7 +84,7 @@ Ext.define('MyApp.view.ResultsPanel', {
 					},
 				]
 			},
-			//menu dropdown code
+			//menu drop-down
 			{
 				xtype: 'panel',
 				id: 'dropMenu',
@@ -88,6 +98,8 @@ Ext.define('MyApp.view.ResultsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'liveBtn',
+							 html: '<div class="menuFont">Livestreams<div>',
+							 action: 'callLive',
 							 flex: 1
 							}
 						]
@@ -99,13 +111,32 @@ Ext.define('MyApp.view.ResultsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'favoritesBtn',
+							 html: '<div class="menuFont">Playlist<div>',
+							 action: 'callFav',
 							 flex: 1
 							}
 						]
 					},
+					//seperator
 					{
 						xtype: 'toolbar',
-						baseCls: 'sepBar'
+						layout: 'hbox',
+						baseCls: 'sepContainer',
+						items: [
+							{
+								xtype: 'spacer',
+								width: 13
+							},
+							{
+								xtype: 'toolbar',
+								baseCls: 'sepBar',
+								flex: 1
+							},
+							{
+								xtype: 'spacer',
+								width: 13
+							}
+						]
 					},
 					{
 						xtype: 'toolbar',
@@ -114,6 +145,7 @@ Ext.define('MyApp.view.ResultsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'settingsBtn',
+							 html: '<div class="menuFont">Settings<div>',
 							 action: 'callSettings',
 							 flex: 1
 							}
@@ -126,6 +158,7 @@ Ext.define('MyApp.view.ResultsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'helpBtn',
+							 html: '<div class="menuFont">Help<div>',
 							 action: 'callHelp',
 							 flex: 1
 							}
@@ -133,29 +166,22 @@ Ext.define('MyApp.view.ResultsPanel', {
 					}
 				]
 			},
+			//filter menu
 			{
 				xtype: 'panel',				
-				height: 35,
-				style: 'background:#2b5b8e;',
+				baseCls: 'subPanel',
 				action: 'callSelect',
 				layout: 'hbox',
 				items: [
 					{
 						xtype: 'panel',
-						baseCls: 'filterPanel',
-						align: 'left',
-						height: 35
-					},
-					{
-						xtype: 'panel',
-						flex: 1,
-						style: 'background:#2b5b8e;',
+						baseCls: 'textPanel',
+						html: '<div class="textPanel">Filters<div>',
 					},
 					{
 						xtype: 'panel',
 						baseCls: 'arrowBtn',
 						id: 'filterBtn',
-						align: 'right',
 					}
 				],
 				listeners: {
@@ -177,6 +203,7 @@ Ext.define('MyApp.view.ResultsPanel', {
 					}
 				}
 			},
+			//filter drop-down
 			{
 				xtype: 'panel',
 				hidden: true,
@@ -189,6 +216,8 @@ Ext.define('MyApp.view.ResultsPanel', {
 						items: [
 							{
 								xtype: 'selectfield',
+								baseCls: 'selectText',
+								inputCls: 'selectCustom',
 								autoSelect: false,
 								flex: 1,
 								id: 'sortDate',
@@ -220,11 +249,17 @@ Ext.define('MyApp.view.ResultsPanel', {
 					},
 					{
 						xtype: 'toolbar',
+						baseCls: 'sepBar'
+					},
+					{
+						xtype: 'toolbar',
 						height: 35,
 						style: 'background:#313131;',
 						items: [
 							{
 								xtype: 'selectfield',
+								baseCls: 'selectText',
+								inputCls: 'selectCustom',
 								autoSelect: false,
 								flex: 1,
 								id: 'sortCongregation',
@@ -275,11 +310,17 @@ Ext.define('MyApp.view.ResultsPanel', {
 					},
 					{
 						xtype: 'toolbar',
+						baseCls: 'sepBar'
+					},
+					{
+						xtype: 'toolbar',
 						height: 35,
 						style: 'background:#313131;',
 						items: [
 							{
 								xtype: 'selectfield',
+								baseCls: 'selectText',
+								inputCls: 'selectCustom',
 								autoSelect: false,
 								flex: 1,
 								id: 'sortTopic',
@@ -330,11 +371,17 @@ Ext.define('MyApp.view.ResultsPanel', {
 					},
 					{
 						xtype: 'toolbar',
+						baseCls: 'sepBar'
+					},
+					{
+						xtype: 'toolbar',
 						height: 35,
 						style: 'background:#313131;',
 						items: [
 							{
 								xtype: 'selectfield',
+								baseCls: 'selectText',
+								inputCls: 'selectCustom',
 								autoSelect: false,
 								flex: 1,
 								id: 'sortSpeaker',
@@ -385,19 +432,19 @@ Ext.define('MyApp.view.ResultsPanel', {
 					}
 				]		
 			},
-			
-				
-			//Videos store list code
+			//Videos store list
 			{
                 xtype: 'list',
                 store : 'Videos',
 				action: 'getLink',
 				flex: 1,
+				baseCls: 'myList',
+				//grouped: true,
 				itemTpl: [
 					'<table>',
 						'<tr>',
-							'<td><img width="128" height="72" src="http://www.wnyc.org/i/620/372/l/80/1/blackbox.jpeg" /></td>',
-							'<td style="padding: 10px"><h2><b>{name}</b><h2>',
+							'<td style="padding: 10px"><img width="128" height="72" align="center" src="http://www.wnyc.org/i/620/372/l/80/1/blackbox.jpeg" /></td>',
+							'<td style="font-family: Segoe UI; font-size: 17px"><h2><b>{name}</b><h2>',
 							'Views: {views}</td>',
 						'</tr>',
 					'</table>',
