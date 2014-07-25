@@ -5,9 +5,11 @@ Ext.define('MyApp.view.SettingsPanel', {
  
     config: {
 		xtype: 'panel',
-		layout: 'vbox',         
+		layout: 'vbox',
+		style: 'background:#f2f2f2;',
+		flex: 1,
 		items: [
-			//menu code
+			//menu
 			{
 				xtype: 'titlebar',
 				baseCls: 'titleBar',
@@ -53,6 +55,7 @@ Ext.define('MyApp.view.SettingsPanel', {
 				hidden: true,
 				layout: 'hbox',
 				style: 'background:#313131;',
+				docked: 'top',
 				items: [
 					{
 						xtype: 'spacer',
@@ -75,10 +78,12 @@ Ext.define('MyApp.view.SettingsPanel', {
 					},
 				]
 			},
+			//menu drop-down
 			{
 				xtype: 'panel',
 				id: 'dropMenu',
 				hidden: true,
+				docked: 'top',
 				items: [
 					
 					{
@@ -88,6 +93,8 @@ Ext.define('MyApp.view.SettingsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'liveBtn',
+							 html: '<div class="menuFont">Livestreams<div>',
+							 action: 'callLive',
 							 flex: 1
 							}
 						]
@@ -99,13 +106,32 @@ Ext.define('MyApp.view.SettingsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'favoritesBtn',
+							 html: '<div class="menuFont">Playlist<div>',
+							 action: 'callFav',
 							 flex: 1
 							}
 						]
 					},
+					//seperator
 					{
 						xtype: 'toolbar',
-						baseCls: 'sepBar'
+						layout: 'hbox',
+						baseCls: 'sepContainer',
+						items: [
+							{
+								xtype: 'spacer',
+								width: 13
+							},
+							{
+								xtype: 'toolbar',
+								baseCls: 'sepBar',
+								flex: 1
+							},
+							{
+								xtype: 'spacer',
+								width: 13
+							}
+						]
 					},
 					{
 						xtype: 'toolbar',
@@ -114,6 +140,7 @@ Ext.define('MyApp.view.SettingsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'settingsBtnUsed',
+							 html: '<div class="menuFont">Settings<div>',
 							 flex: 1,
 							}
 						]
@@ -125,6 +152,7 @@ Ext.define('MyApp.view.SettingsPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'helpBtn',
+							 html: '<div class="menuFont">Help<div>',
 							 flex: 1,
 							 action: 'callHelp'
 							}
@@ -134,8 +162,17 @@ Ext.define('MyApp.view.SettingsPanel', {
 			},
 			{
 				xtype: 'panel',				
-				height: 35,
-				baseCls: 'popBar'
+				baseCls: 'subPanel',
+				layout: 'hbox',
+				docked: 'top',
+				items: [
+					{
+						xtype: 'panel',
+						baseCls: 'textPanel',
+						html: '<div class="textPanel">Settings<div>',
+						align: 'left',
+					}
+				]
 			},
 			/*
 			{
@@ -155,7 +192,6 @@ Ext.define('MyApp.view.SettingsPanel', {
 			*/
 			{
 				xtype: 'panel',
-				html: 'settings'
 			}
 		]
     }

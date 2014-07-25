@@ -4,9 +4,11 @@ Ext.define('MyApp.view.MainPanel', {
  
     config: {
 		xtype: 'panel',
-		layout: 'vbox',         
+		layout: 'vbox',
+		style: 'background:#f2f2f2;',
+		flex: 1,		
 		items: [
-			//menu code
+			//menu
 			{
 				xtype: 'titlebar',
 				baseCls: 'titleBar',
@@ -27,7 +29,6 @@ Ext.define('MyApp.view.MainPanel', {
 											
 					//search button
 					{
-
 						xtype: 'button',
 						baseCls: 'searchBtn',
 						itemId: 'searchBtn',
@@ -38,7 +39,6 @@ Ext.define('MyApp.view.MainPanel', {
 					{
 						xtype: 'button',
 						baseCls: 'homeBtn',
-						itemId: 'homeBtn',
 						align: 'left'
 					},
 				]
@@ -87,6 +87,8 @@ Ext.define('MyApp.view.MainPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'liveBtn',
+							 html: '<div class="menuFont">Livestreams<div>',
+							 action: 'callLive',
 							 flex: 1
 							}
 						]
@@ -99,13 +101,32 @@ Ext.define('MyApp.view.MainPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'favoritesBtn',
+							 html: '<div class="menuFont">Playlist<div>',
+							 action: 'callFav',
 							 flex: 1
 							}
 						]
 					},
+					//seperator
 					{
 						xtype: 'toolbar',
-						baseCls: 'sepBar'
+						layout: 'hbox',
+						baseCls: 'sepContainer',
+						items: [
+							{
+								xtype: 'spacer',
+								width: 13
+							},
+							{
+								xtype: 'toolbar',
+								baseCls: 'sepBar',
+								flex: 1
+							},
+							{
+								xtype: 'spacer',
+								width: 13
+							}
+						]
 					},
 					//settings button
 					{
@@ -115,6 +136,7 @@ Ext.define('MyApp.view.MainPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'settingsBtn',
+							 html: '<div class="menuFont">Settings<div>',
 							 action: 'callSettings',
 							 flex: 1
 							}
@@ -128,6 +150,7 @@ Ext.define('MyApp.view.MainPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'helpBtn',
+							 html: '<div class="menuFont">Help<div>',
 							 action: 'callHelp',
 							 flex: 1
 							}
@@ -138,28 +161,20 @@ Ext.define('MyApp.view.MainPanel', {
 			//category menu
 			{
 				xtype: 'panel',				
-				height: 35,
-				style: 'background:#2b5b8e;',
+				baseCls: 'subPanel',
 				action: 'callSelect',
 				layout: 'hbox',
 				items: [
 					{
 						xtype: 'panel',
-						baseCls: 'popularPanel',
-						align: 'left',
-						id: 'catPanel',
-						height: 35
-					},
-					{
-						xtype: 'panel',
-						flex: 1,
-						style: 'background:#2b5b8e;',
+						baseCls: 'textPanel',
+						html: '<div class="textPanel">Popular</div>',
+						id: 'catPanel',					
 					},
 					{
 						xtype: 'panel',
 						baseCls: 'arrowBtn',
 						id: 'catBtn',
-						align: 'right',
 					}
 				],
 				listeners: {
@@ -181,6 +196,7 @@ Ext.define('MyApp.view.MainPanel', {
 					}
 				}
 			},
+			//category drop-down
 			{
 				xtype: 'panel',
 				hidden: true,
@@ -188,25 +204,46 @@ Ext.define('MyApp.view.MainPanel', {
 				items: [
 					{
 						xtype: 'toolbar',
-						height: 35,
 						style: 'background:#313131;',
 						items: [
 							{
 								xtype: 'button',
-								baseCls: 'popBtn',
+								baseCls: 'textBtn',
+								html: '<div class="subTxt">Popular</div>',
 								flex: 1,
 								action: 'callPopular',
 							},
 						]
 					},
+					//seperator
 					{
 						xtype: 'toolbar',
-						height: 35,
+						layout: 'hbox',
+						baseCls: 'sepContainer2',
+						items: [
+							{
+								xtype: 'spacer',
+								width: 13
+							},
+							{
+								xtype: 'toolbar',
+								baseCls: 'sepBar2',
+								flex: 1
+							},
+							{
+								xtype: 'spacer',
+								width: 13
+							}
+						]
+					},
+					{
+						xtype: 'toolbar',
 						style: 'background:#313131;',
 						items: [
 							{
 								xtype: 'button',
-								baseCls: 'recentBtn',
+								baseCls: 'textBtn',
+								html: '<div class="subTxt">Recent</div>',
 								flex: 1,
 								action: 'callAdded',
 							},
@@ -214,23 +251,22 @@ Ext.define('MyApp.view.MainPanel', {
 					},
 				]
 			},		
-			//Videos store list code
+			//Videos store list
 			{
                 xtype: 'list',
                 store : 'Videos',
-				action: 'getLink',
 				flex: 1,
-				height: 'auto',
+				baseCls: 'myList',
+				stripeRows: true,
 				itemTpl: [
 					'<table>',
 						'<tr>',
-							'<td><img width="128" height="72" src="http://www.wnyc.org/i/620/372/l/80/1/blackbox.jpeg" /></td>',
-							'<td style="padding: 10px"><h2><b>{name}</b><h2>',
+							'<td style="padding: 10px"><img width="128" height="72" align="center" src="http://www.wnyc.org/i/620/372/l/80/1/blackbox.jpeg" /></td>',
+							'<td class="fontStyle"><h2><b>{name}</b><h2>',
 							'Views: {views}</td>',
 						'</tr>',
 					'</table>',
-				],
-				emptyText: '<div class="Content">No Matching Videos</div>',
+				]
             },
 		] 
     }

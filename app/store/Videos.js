@@ -10,6 +10,14 @@ Ext.define('MyApp.store.Videos', {
         me.callParent([Ext.apply({
             storeId: 'Videos',
             model: 'MyApp.model.Video',
+			/*
+			grouper: {
+				groupFn: function(searchGlobal) {
+					var convert= JSON.parse(searchGlobal);
+					return convert;
+				}
+			},
+			*/
             data: [
                 [
                     'Video01',

@@ -5,9 +5,11 @@ Ext.define('MyApp.view.HelpPanel', {
  
     config: {
 		xtype: 'panel',
-		layout: 'vbox',         
+		layout: 'vbox',
+		style: 'background:#f2f2f2;',
+		flex: 1,
 		items: [
-			//menu code
+			//menu
 			{
 				xtype: 'titlebar',
 				baseCls: 'titleBar',
@@ -52,6 +54,7 @@ Ext.define('MyApp.view.HelpPanel', {
 				id: 'searchBar',
 				hidden: true,
 				layout: 'hbox',
+				docked: 'top',
 				style: 'background:#313131;',
 				items: [
 					{
@@ -75,9 +78,11 @@ Ext.define('MyApp.view.HelpPanel', {
 					},
 				]
 			},
+			//menu drop-down
 			{
 				xtype: 'panel',
 				id: 'dropMenu',
+				docked: 'top',
 				hidden: true,
 				items: [
 					
@@ -88,6 +93,8 @@ Ext.define('MyApp.view.HelpPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'liveBtn',
+							 html: '<div class="menuFont">Livestreams<div>',
+							 action: 'callLive',
 							 flex: 1
 							}
 						]
@@ -99,13 +106,32 @@ Ext.define('MyApp.view.HelpPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'favoritesBtn',
+							 html: '<div class="menuFont">Playlist<div>',
+							 action: 'callFav',
 							 flex: 1
 							}
 						]
 					},
+					//seperator
 					{
 						xtype: 'toolbar',
-						baseCls: 'sepBar'
+						layout: 'hbox',
+						baseCls: 'sepContainer',
+						items: [
+							{
+								xtype: 'spacer',
+								width: 13
+							},
+							{
+								xtype: 'toolbar',
+								baseCls: 'sepBar',
+								flex: 1
+							},
+							{
+								xtype: 'spacer',
+								width: 13
+							}
+						]
 					},
 					{
 						xtype: 'toolbar',
@@ -114,6 +140,7 @@ Ext.define('MyApp.view.HelpPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'settingsBtn',
+							 html: '<div class="menuFont">Settings<div>',
 							 action: 'callSettings',
 							 flex: 1
 							}
@@ -126,8 +153,8 @@ Ext.define('MyApp.view.HelpPanel', {
 							{
 							 xtype: 'button',
 							 baseCls: 'helpBtnUsed',
-							 flex: 1
-							 
+							 html: '<div class="menuFont">Help<div>',
+							 flex: 1							 
 							}
 						]
 					}
@@ -135,8 +162,17 @@ Ext.define('MyApp.view.HelpPanel', {
 			},
 			{
 				xtype: 'panel',				
-				height: 35,
-				baseCls: 'popBar'
+				baseCls: 'subPanel',
+				docked: 'top',
+				layout: 'hbox',
+				items: [
+					{
+						xtype: 'panel',
+						baseCls: 'textPanel',
+						html: '<div class="textPanel">Help<div>',
+						align: 'left',
+					}
+				]
 			},
 			/*
 			{
@@ -156,7 +192,6 @@ Ext.define('MyApp.view.HelpPanel', {
 			*/
 			{
 				xtype: 'panel',
-				html: 'help'
 			}
 		]
     }
