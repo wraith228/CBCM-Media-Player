@@ -1,171 +1,13 @@
 Ext.define('MyApp.view.ResultsPanel', {
     extend: 'Ext.Panel',
     alias : 'widget.resultsPanel',
- 
-    config: {		
+	
+    config: {
 		xtype: 'panel',
 		layout: 'vbox',
 		style: 'background:#f2f2f2;',
 		flex: 1,
 		items: [
-			//menu
-			{
-				xtype: 'titlebar',
-				baseCls: 'titleBar',
-				docked: 'top',
-				id: 'cbcmTitle',
-				height: 50,
-				
-				items: [
-					//menu button
-					{
-						xtype: 'button',
-						baseCls: 'moreBtn',
-						itemID: 'menuBtn',
-						action: 'callMenu',
-						align: 'left',
-
-					},
-											
-					//search button
-					{
-
-						xtype: 'button',
-						baseCls: 'searchBtn',
-						itemId: 'searchBtn',
-						action: 'callSearch',
-						align: 'right'
-					},
-					//home button
-					{
-						xtype: 'button',
-						baseCls: 'homeBtn',
-						itemId: 'homeBtn',
-						//action: 'callHome',
-						align: 'left',
-						//bug test
-						handler: function() {
-							console.log('Home');
-							Ext.Viewport.setActiveItem(Ext.widget('mainPanel'));
-							var store = Ext.getStore('Videos');
-							store.clearFilter();
-							MyApp.app.getController('Processes').popularSort();
-						}
-					},
-				]
-			},
-			//search field drop-down
-			{
-				xtype: 'toolbar',
-				baseCls: 'titlebar',
-				id: 'searchBar',
-				hidden: true,
-				layout: 'hbox',
-				style: 'background:#313131;',
-				items: [
-					{
-						xtype: 'spacer',
-						width: 10
-					},
-					{
-						xtype: 'searchfield',
-						placeHolder: 'Search...',
-						//itemId: 'searchBox',
-						flex: 1,
-						listeners : {
-							action: function() {
-								this.fireEvent('newSearch', this);
-							}
-                        }
-					},
-					{
-						xtype: 'spacer',
-						width: 10
-					},
-				]
-			},
-			//menu drop-down
-			{
-				xtype: 'panel',
-				id: 'dropMenu',
-				hidden: true,
-				items: [
-					
-					{
-						xtype: 'toolbar',
-						baseCls: 'titleBar',
-						items: [
-							{
-							 xtype: 'button',
-							 baseCls: 'liveBtn',
-							 html: '<div class="menuFont">Livestreams<div>',
-							 action: 'callLive',
-							 flex: 1
-							}
-						]
-					},
-					{
-						xtype: 'toolbar',
-						baseCls: 'titleBar',
-						items: [
-							{
-							 xtype: 'button',
-							 baseCls: 'favoritesBtn',
-							 html: '<div class="menuFont">Playlist<div>',
-							 action: 'callFav',
-							 flex: 1
-							}
-						]
-					},
-					//seperator
-					{
-						xtype: 'toolbar',
-						layout: 'hbox',
-						baseCls: 'sepContainer',
-						items: [
-							{
-								xtype: 'spacer',
-								width: 13
-							},
-							{
-								xtype: 'toolbar',
-								baseCls: 'sepBar',
-								flex: 1
-							},
-							{
-								xtype: 'spacer',
-								width: 13
-							}
-						]
-					},
-					{
-						xtype: 'toolbar',
-						baseCls: 'titleBar',
-						items: [
-							{
-							 xtype: 'button',
-							 baseCls: 'settingsBtn',
-							 html: '<div class="menuFont">Settings<div>',
-							 action: 'callSettings',
-							 flex: 1
-							}
-						]
-					},
-					{
-						xtype: 'toolbar',
-						baseCls: 'titleBar',
-						items: [
-							{
-							 xtype: 'button',
-							 baseCls: 'helpBtn',
-							 html: '<div class="menuFont">Help<div>',
-							 action: 'callHelp',
-							 flex: 1
-							}
-						]
-					}
-				]
-			},
 			//filter menu
 			{
 				xtype: 'panel',				
@@ -174,9 +16,14 @@ Ext.define('MyApp.view.ResultsPanel', {
 				layout: 'hbox',
 				items: [
 					{
+						xtype: 'spacer',
+						width: 12,
+					},
+					{
 						xtype: 'panel',
 						baseCls: 'textPanel',
 						html: '<div class="textPanel">Filters<div>',
+						flex: 1
 					},
 					{
 						xtype: 'panel',
@@ -432,19 +279,25 @@ Ext.define('MyApp.view.ResultsPanel', {
 					}
 				]		
 			},
+			{
+				xtype:'panel',
+				height: 30,
+				style: 'background:#f2f2f2;',
+				id: 'searchLabel'
+			},
 			//Videos store list
 			{
                 xtype: 'list',
-                store : 'Videos',
-				action: 'getLink',
+				store : 'Videos',
 				flex: 1,
 				baseCls: 'myList',
-				//grouped: true,
+				stripeRows: true,
+				action: 'tapVid',
 				itemTpl: [
 					'<table>',
 						'<tr>',
-							'<td style="padding: 10px"><img width="128" height="72" align="center" src="http://www.wnyc.org/i/620/372/l/80/1/blackbox.jpeg" /></td>',
-							'<td style="font-family: Segoe UI; font-size: 17px"><h2><b>{name}</b><h2>',
+							'<td style="padding: 13px"><img width="128" height="72" align="center" src="http://www.wnyc.org/i/620/372/l/80/1/blackbox.jpeg" /></td>',
+							'<td class="fontStyle3"><h2><b>{name}</b><h2>',
 							'Views: {views}</td>',
 						'</tr>',
 					'</table>',
