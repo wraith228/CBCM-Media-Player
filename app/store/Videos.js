@@ -84,7 +84,7 @@ Ext.define('MyApp.store.Videos', {
 					'speaker1',
                 ],
                 [
-                    'Video09',
+                    'Video0999999999999999999999999999999999999',
 					'Mon May 26 2014 03:22:14 +0000',
 					'95',
 					'cong3',

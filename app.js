@@ -10,6 +10,7 @@ Ext.application({
  congFilt: 'string',
  topicFilt: 'string',
  speakFilt: 'string',
+ listGlobal: 'string',
  
  requires: [
                'MyApp.view.MainPanel', 'MyApp.view.ResultsPanel', 'MyApp.view.VideoPlayer', 
@@ -17,8 +18,9 @@ Ext.application({
 			   'MyApp.view.PlaylistPanel',
            ],
                 
-    views : ['MainPanel', 'ResultsPanel', 'VideoPlayer', 'SettingsPanel', 'HelpPanel', 'PlaylistPanel', 'LivePanel'],          
+    views : ['MainPanel', 'ResultsPanel', 'VideoPlayer', 'SettingsPanel', 'HelpPanel', 'PlaylistPanel', 'LivePanel','View', 'PlayOverlay'],          
     controllers: ['Processes', 'Menu', 'Navigation'],
+	stores: ['Videos', 'SearchRecords', 'Playlist'],
      
     launch: function() {
      console.log('Application launch');
@@ -27,7 +29,7 @@ Ext.application({
       layout: 'vbox',
          items: [{
           flex: 1,
-          xtype: 'mainPanel'
+          xtype: 'View'
             }]
      });
     }

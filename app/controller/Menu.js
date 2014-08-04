@@ -8,6 +8,7 @@ Ext.define('MyApp.controller.Menu', {
 		refs: {
 			myContainer: 'mainPanel',
 			mainPanel: '#dropMenu',
+			searchBar: 'mainPanel #searchBar'
 		},
 		control: {
 			'button[action=callMenu]': {
@@ -16,7 +17,7 @@ Ext.define('MyApp.controller.Menu', {
 			'button[action=callSearch]': {
 				tap: 'searchDrop'
 			},
-			'panel[action=callSelect]': {
+			'myList': {
 				itemtap: 'selectDrop'
 			},
 		} 
@@ -24,6 +25,7 @@ Ext.define('MyApp.controller.Menu', {
 	
 	//menu drop function
 	menuDrop: function() {
+	console.log('pressed');
 		var menu = Ext.getCmp('dropMenu');
 		if (menu.isHidden()) {
 			menu.show();

@@ -3,17 +3,22 @@ Ext.define('MyApp.controller.Processes', {
  
 	config: {
 		profile: Ext.os.deviceType.toLowerCase(),
-		stores : ['Videos'],
-		models : ['Video'],
+		stores : ['Videos','SearchRecords'],
+		models : ['Video','SearchModel'],
 		refs: {
 			myContainer: 'sarchPanel',
-			myContainer: 'mainPanel',
+			myContainer: 'View',
+			playOverlay: {
+                autoCreate: true,
+                selector: '#companies',
+                xtype: 'companies'
+            }
 		},
 		control: {
-			'mainPanel': {
+			'View': {
 				activate: 'onActivate'
 			},
-			'searchfield' : {
+			'searchfield': {
 				newSearch : 'onNewSearch'
 			},	
 			'button[action=callPopular]': {
@@ -21,19 +26,38 @@ Ext.define('MyApp.controller.Processes', {
 			},
 			'button[action=callAdded]': {
 				tap: 'addedSort'
-			},		
+			},	
+			'button[action=addPlaylist]': {
+				tap: 'addPlay'
+			},
+			'list[action=tapPlay]': {
+				itemtap: 'playTap'
+			},
 		} 
 	},
 	
 	onActivate: function() {
-		console.log('Main container is active');
+
 	},
 	
 	//search function
 	onNewSearch: function(searchField) {
 		queryString = searchField.getValue();
-		Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);  
-		Ext.Viewport.setActiveItem(Ext.widget('resultsPanel'));
+		MyApp.app.getController('Processes').closeMenus();
+		
+		var searchStore = Ext.getStore('SearchRecords');
+		searchStore.add({query: queryString});
+
+		var main = Ext.getCmp('main');
+		var active = main.getActiveItem().xtype;
+		
+		main.push({
+			xtype: 'resultsPanel'
+		});
+		
+		var searchLabel = Ext.getCmp('searchLabel');
+		searchLabel.setHtml('<div class=textPanel3>Search results for '+queryString+':<div>');
+		
 		searchGlobal = queryString;
 		console.log(this,'Searching by: ' + queryString);
 		
@@ -43,6 +67,7 @@ Ext.define('MyApp.controller.Processes', {
 		
 		var store = Ext.getStore('Videos');
 		store.clearFilter();
+		store.sort('postDate', 'DESC');
 
 		if(queryString){
 			var thisRegEx = new RegExp(queryString, "i");
@@ -57,7 +82,34 @@ Ext.define('MyApp.controller.Processes', {
 				return false;
 			});
 		}
-	},	
+	},
+	
+	//reset to previous search function
+	searchReset: function() {
+		var searchStore = Ext.getStore('SearchRecords');
+		var last = searchStore.last().get('query');
+		
+		congFilt = null;
+		speakFilt = null;
+		topicFilt = null;
+		console.log(this,'Reseting search to: ' + last);
+		var store = Ext.getStore('Videos');
+		store.clearFilter();
+
+		if(last){
+			var thisRegEx = new RegExp(last, "i");
+			store.filterBy(function(record) {
+				if (thisRegEx.test(record.get('name')) ||
+				  thisRegEx.test(record.get('postDate')) ||
+				  thisRegEx.test(record.get('cong')) ||
+				  thisRegEx.test(record.get('speaker')) ||
+				  thisRegEx.test(record.get('topic'))) {
+					return true;
+				};
+				return false;
+			});
+		}
+	},
 	
 	//popularity store sort function
 	popularSort: function() {
@@ -103,4 +155,26 @@ Ext.define('MyApp.controller.Processes', {
 	init: function() {
 		console.log('Controller initialized');
 	},
+	
+	//add to playlist function
+	addPlay: function() {
+		var noticeBar = Ext.getCmp('noticeBar');
+		noticeBar.setHtml('<div class="textPanel2">Added to playlist<div>');
+		var playStore = Ext.getStore('Playlist');
+		var store = Ext.getStore('Videos');
+		playStore.add(listGlobal);
+	},
+	
+	closeMenus: function() {
+		var menu = Ext.getCmp('dropMenu');
+		menu.hide();
+		var search = Ext.getCmp('searchBar');
+		search.hide();
+	},
+	
+	playTap: function(list, e, options) {
+		var me = this;
+        var popup = me.getPlayOverlay();
+        popup.showBy(button);
+	}
 });
