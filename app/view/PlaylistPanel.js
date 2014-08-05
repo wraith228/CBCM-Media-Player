@@ -8,25 +8,6 @@ Ext.define('MyApp.view.PlaylistPanel', {
 		style: 'background:#f2f2f2;',
 		flex: 1,
 		items: [
-			{
-				xtype: 'panel',				
-				baseCls: 'subPanel',
-				docked: 'top',
-				layout: 'hbox',
-				items: [
-					{
-						xtype: 'spacer',
-						width: 12,
-					},
-					{
-						xtype: 'panel',
-						baseCls: 'textPanel',
-						html: '<div class="textPanel">Playlist<div>',
-						align: 'left',
-						flex: 1
-					}
-				]
-			},
 			//Playlist store list
 			{
 				xtype: 'list',
@@ -43,7 +24,8 @@ Ext.define('MyApp.view.PlaylistPanel', {
 							'Views: {views}</td>',
 						'</tr>',
 					'</table>',					
-				]
+				],
+				emptyText: '<div class="Content">Your playlist is empty</div>',
 			},
 		]
     }

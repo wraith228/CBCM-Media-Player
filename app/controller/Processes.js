@@ -8,16 +8,8 @@ Ext.define('MyApp.controller.Processes', {
 		refs: {
 			myContainer: 'sarchPanel',
 			myContainer: 'View',
-			playOverlay: {
-                autoCreate: true,
-                selector: '#companies',
-                xtype: 'companies'
-            }
 		},
 		control: {
-			'View': {
-				activate: 'onActivate'
-			},
 			'searchfield': {
 				newSearch : 'onNewSearch'
 			},	
@@ -33,11 +25,10 @@ Ext.define('MyApp.controller.Processes', {
 			'list[action=tapPlay]': {
 				itemtap: 'playTap'
 			},
+			'button[action=deleteVid]': {
+				tap: 'deleteVid'
+			}
 		} 
-	},
-	
-	onActivate: function() {
-
 	},
 	
 	//search function
@@ -55,12 +46,21 @@ Ext.define('MyApp.controller.Processes', {
 			xtype: 'resultsPanel'
 		});
 		
+		//show/hide menu panels
+		var filters = Ext.getCmp('filters');
+		filters.show();
+		var title = Ext.getCmp('titlePanel');
+		title.hide();
+		var catMenu = Ext.getCmp('catMenu');
+		catMenu.hide();
+		
 		var searchLabel = Ext.getCmp('searchLabel');
 		searchLabel.setHtml('<div class=textPanel3>Search results for '+queryString+':<div>');
 		
 		searchGlobal = queryString;
 		console.log(this,'Searching by: ' + queryString);
 		
+		//reset global filters
 		congFilt = null;
 		speakFilt = null;
 		topicFilt = null;
@@ -68,7 +68,8 @@ Ext.define('MyApp.controller.Processes', {
 		var store = Ext.getStore('Videos');
 		store.clearFilter();
 		store.sort('postDate', 'DESC');
-
+		
+		//search filters
 		if(queryString){
 			var thisRegEx = new RegExp(queryString, "i");
 			store.filterBy(function(record) {
@@ -122,7 +123,7 @@ Ext.define('MyApp.controller.Processes', {
 		button.setCls('arrowBtn');	
 		var popSorter = [{
 			sorterFn: function(video1, video2) {
-			
+				//popularity sort algorithm
 				var sDate1 = video1.get('postDate'),
 				v1 = video1.get('views'),
 				eDate = new Date(),
@@ -165,16 +166,36 @@ Ext.define('MyApp.controller.Processes', {
 		playStore.add(listGlobal);
 	},
 	
+	//close menus when navigating
 	closeMenus: function() {
 		var menu = Ext.getCmp('dropMenu');
 		menu.hide();
 		var search = Ext.getCmp('searchBar');
 		search.hide();
+		var filters = Ext.getCmp('filters');
+		filters.hide();
+		var catMenu = Ext.getCmp('catMenu');
+		catMenu.hide();
 	},
 	
-	playTap: function(list, e, options) {
-		var me = this;
-        var popup = me.getPlayOverlay();
-        popup.showBy(button);
+	//add playlist overlay
+	playTap: function(view, index, target, record, event) {
+		listGlobal = record;
+		var overlay = Ext.getCmp('playOverlay');
+		if (overlay) {
+			overlay.destroy();
+		}
+		var playList = Ext.getCmp('playList');
+        var popup = Ext.create('MyApp.view.PlayOverlay');
+		Ext.Viewport.add(popup);
+		popup.show();
+	},
+	
+	//delete video from playlist
+	deleteVid: function() {
+		var store = Ext.getStore('Playlist');
+		store.remove(listGlobal);
+		var overlay = Ext.getCmp('playOverlay');
+		overlay.destroy();
 	}
 });

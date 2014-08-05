@@ -9,41 +9,6 @@ Ext.define('MyApp.view.LivePanel', {
 		flex: 1,
 		items: [
 			{
-				xtype: 'panel',				
-				baseCls: 'subPanel',
-				docked: 'top',
-				layout: 'hbox',
-				items: [
-					{
-						xtype: 'spacer',
-						width: 12,
-					},
-					{
-						xtype: 'panel',
-						baseCls: 'textPanel',
-						html: '<div class="textPanel">Livestreams<div>',
-						align: 'left',
-						flex: 1
-					}
-				]
-			},
-			/*
-			{
-				xtype: 'toolbar',
-				docked: 'top',
-				title: 'Settings',
-				items: [
-					{
-						xtype: 'button',
-						iconCls: 'arrow_left',
-						action: 'goBack',
-						align: 'left'
-
-					}
-				]
-			},
-			*/
-			{
 				xtype: 'panel',
 				id: 'live1',
 				style: 'background:#e2e2e2;',

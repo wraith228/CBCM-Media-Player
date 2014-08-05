@@ -10,41 +10,6 @@ Ext.define('MyApp.view.HelpPanel', {
 		flex: 1,
 		items: [
 			{
-				xtype: 'panel',				
-				baseCls: 'subPanel',
-				docked: 'top',
-				layout: 'hbox',
-				items: [
-					{
-						xtype: 'spacer',
-						width: 12,
-					},
-					{
-						xtype: 'panel',
-						baseCls: 'textPanel',
-						html: '<div class="textPanel">Help<div>',
-						align: 'left',
-						flex: 1
-					}
-				]
-			},
-			/*
-			{
-				xtype: 'toolbar',
-				docked: 'top',
-				title: 'Settings',
-				items: [
-					{
-						xtype: 'button',
-						iconCls: 'arrow_left',
-						action: 'goBack',
-						align: 'left'
-
-					}
-				]
-			},
-			*/
-			{
 				xtype: 'panel',
 			}
 		]

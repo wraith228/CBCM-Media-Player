@@ -18,7 +18,7 @@ Ext.application({
 			   'MyApp.view.PlaylistPanel',
            ],
                 
-    views : ['MainPanel', 'ResultsPanel', 'VideoPlayer', 'SettingsPanel', 'HelpPanel', 'PlaylistPanel', 'LivePanel','View', 'PlayOverlay'],          
+    views : ['MainPanel', 'ResultsPanel', 'VideoPlayer', 'SettingsPanel', 'HelpPanel', 'PlaylistPanel', 'LivePanel','View', 'PlayOverlay', 'VidContainer'],          
     controllers: ['Processes', 'Menu', 'Navigation'],
 	stores: ['Videos', 'SearchRecords', 'Playlist'],
      
