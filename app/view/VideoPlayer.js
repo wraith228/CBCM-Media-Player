@@ -62,7 +62,32 @@
 						}
 						*/
 					}],				
+				},
+				//Detailed view goes here
+				{
+		                        items: [
+		                            {
+		                                xtype:'panel',
+		                                html: '<a href="http://www.google.com">This is where the video goes</a>',
+		                                flex:10,
+		                                pack:'center'
+		                            },
+		                            {
+		                                xtype:'panel',
+		                                id:'Details',
+		                                flex:1
+		                            
+		                            },
+		                            {
+		                                xtype:'panel',
+		                                id: 'description',
+		                                flex:1,
+		                            },
+		                        
+		                        ]
+                    
 				}
+				
 			]			
 		}
 		
