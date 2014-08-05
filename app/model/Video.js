@@ -4,13 +4,13 @@ Ext.define('MyApp.model.Video', {
     config: {
 		idProperty: 'video',
 		fields: [
-            {name: 'name', type: 'string'},
+            		{name: 'name', type: 'string'},
 			{name: 'postDate', type: 'date', format:'MM-DD-YYYY'},
 			{name: 'views', type: 'int'},
 			{name: 'cong', type: 'string'},
 			{name: 'topic', type: 'string'},
 			{name: 'speaker', type: 'string'},
-			{name: 'topic', type: 'string'},
+			{name: 'description', type: 'string'},
 			{name: 'vidThumb', type: 'image/png'},
 			{name: 'button'},
         ]
