@@ -129,6 +129,13 @@ Ext.define('MyApp.controller.Navigation', {
 		nameStore.add({vidName: name});
 		
 		listGlobal = record;
+		var views = record.get('views');
+	        var postDate = record.get('postDate');
+	        var detailPanel = Ext.getCmp('Details');
+	        detailPanel.setHtml('<div>Post Date: '+postDate+', Views: '+views+'<div>');
+	        var description = record.get('description');
+	        var descriptionPanel = Ext.getCmp('description');
+	        descriptionPanel.setHtml('<div>'+description+'<div>');
 	},
 	
 	//play playlist video
