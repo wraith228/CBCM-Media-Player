@@ -220,7 +220,15 @@ Ext.define('MyApp.controller.Processes', {
 	//delete video from playlist
 	deleteVid: function() {
 		var store = Ext.getStore('Playlist');
-		store.remove(listGlobal);
+		//console.log(store.getCount());
+		if (store.getCount() == 1) {
+			store.removeAll();
+			console.log(store.getCount());
+		}
+		else {
+			store.remove(listGlobal);
+		}
+		
 		var overlay = Ext.getCmp('playOverlay');
 		overlay.destroy();
 	}
