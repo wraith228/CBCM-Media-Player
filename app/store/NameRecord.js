@@ -1,11 +1,11 @@
 Ext.define('MyApp.store.NameRecord', {
     extend: 'Ext.data.Store',
      
-    requires: ['MyApp.model.NameModel'],
+    requires: ['MyApp.model.Video'],
 	autoLoad: true,
 
     config: {
-		model: 'MyApp.model.NameModel',
+		model: 'MyApp.model.Video',
 
 		proxy: {
 			type: 'localstorage',

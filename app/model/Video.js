@@ -10,9 +10,9 @@ Ext.define('MyApp.model.Video', {
 			{name: 'cong', type: 'string'},
 			{name: 'topic', type: 'string'},
 			{name: 'speaker', type: 'string'},
-			{name: 'topic', type: 'string'},
+			{name: 'vidUrl', type: 'string'},
 			{name: 'vidThumb', type: 'image/png'},
-			{name: 'button'},
+			{name: 'id', type: 'int'},
         ]
     }
 });

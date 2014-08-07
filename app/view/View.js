@@ -564,6 +564,63 @@ alias : 'widget.View',
 				]		
 			},
 			{
+				xtype: 'panel',
+				id: 'noticeBar',
+				layout: 'hbox',
+				docked: 'top',			
+				html: '<div class="textPanel2">Added to playlist<div>',
+				hidden: true,
+			},
+			//video player
+			{
+				xtype: 'panel',
+				docked: 'top',
+				id: 'vidDrop',
+				hidden: true,
+				height: window.innerHeight/2.5,
+				items: [{
+					xtype: 'video',
+					id: 'vidPlayer',
+					
+					autoPause: true,
+					autoResume: true,
+					enableControls: true,
+					preload: true,
+					
+					layout: {
+						type: 'vbox',
+						fullscreen: true,
+					},
+					/*
+					if (!this.getEnableControls() || Ext.os.is.Android) {
+						this.add({
+							xtype: 'button',
+							text: 'Play Video',
+							handler: function(b,e) {
+								var video = this.getParent().down('video');
+								if (video.isPlaying()) {
+									video.pause();
+									b.setText('Play Video');
+								} else {
+									video.play();
+									b.setText('Pause Video');
+								}
+							}
+						})
+					}
+					*/
+				}],
+				listeners: {
+					show: function() {
+					console.log('test');
+						var vidPlayer = Ext.getCmp('vidPlayer');
+						var vidUrl = listGlobal.get('vidUrl')
+						vidPlayer.setUrl(vidUrl);
+						vidPlayer.setPosterUrl('https://didattica.polito.it/zxd/cms_data/image/16/play-button.png');
+					}
+				}					
+			},
+			{
 				xtype: 'mainPanel',
 			}
 		]
