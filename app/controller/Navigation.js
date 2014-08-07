@@ -35,11 +35,31 @@ Ext.define('MyApp.controller.Navigation', {
 	
 	//go home function
 	goHome: function() {
-		Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
-		Ext.Viewport.setActiveItem(Ext.widget('View'));
+		var main = Ext.getCmp('main');
+		var active = main.getActiveItem().xtype;
+		
 		var store = Ext.getStore('Videos');
 		store.clearFilter();
 		MyApp.app.getController('Processes').popularSort();
+		
+		var searchStore = Ext.getStore('SearchRecords');
+		searchStore.removeAll();
+		
+		var nameStore = Ext.getStore('NameRecord');
+		nameStore.removeAll();
+		
+		var filters = Ext.getCmp('filters');
+		filters.hide();
+		var filterDrop = Ext.getCmp('selectDrop');
+		filterDrop.hide();
+		var title = Ext.getCmp('titlePanel');
+		title.hide();
+		var catMenu = Ext.getCmp('catMenu');
+		catMenu.show();
+		var vidDrop = Ext.getCmp('vidDrop');
+		vidDrop.hide();
+		
+		main.reset();
 	},
 	
 	//settings view function
@@ -172,6 +192,8 @@ Ext.define('MyApp.controller.Navigation', {
 			searchStore.remove(last);
 			var filters = Ext.getCmp('filters');
 			filters.hide();
+			var filterDrop = Ext.getCmp('selectDrop');
+			filterDrop.hide();
 		}
 		
 		//removes last video record in store for back navigation

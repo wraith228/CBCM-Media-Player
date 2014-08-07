@@ -202,6 +202,8 @@ Ext.define('MyApp.controller.Processes', {
 		if (overlay) {
 			overlay.destroy();
 		}
+		var filterDrop = Ext.getCmp('selectDrop');
+		filterDrop.hide();
 	},
 	
 	//add playlist overlay
@@ -220,10 +222,8 @@ Ext.define('MyApp.controller.Processes', {
 	//delete video from playlist
 	deleteVid: function() {
 		var store = Ext.getStore('Playlist');
-		//console.log(store.getCount());
 		if (store.getCount() == 1) {
 			store.removeAll();
-			console.log(store.getCount());
 		}
 		else {
 			store.remove(listGlobal);
