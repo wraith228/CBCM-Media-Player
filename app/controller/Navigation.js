@@ -4,7 +4,7 @@ Ext.define('MyApp.controller.Navigation', {
 	config: {
 		profile: Ext.os.deviceType.toLowerCase(),
 		stores : ['Videos','NameRecord'],
-		models : ['Video','NameModel'],
+		models : ['Video'],
 		control: {
 			'button[action=callHelp]': {
 				tap: 'helpPop'
@@ -35,7 +35,6 @@ Ext.define('MyApp.controller.Navigation', {
 	
 	//go home function
 	goHome: function() {
-		console.log('Home');
 		Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
 		Ext.Viewport.setActiveItem(Ext.widget('View'));
 		var store = Ext.getStore('Videos');
@@ -109,6 +108,7 @@ Ext.define('MyApp.controller.Navigation', {
 	
 	//video view function
 	videoTap: function(view, index, target, record, event) {
+		listGlobal = record;
 		MyApp.app.getController('Processes').closeMenus();
 		var main = Ext.getCmp('main');
 		var active = main.getActiveItem().xtype;
@@ -117,18 +117,19 @@ Ext.define('MyApp.controller.Navigation', {
 				xtype: 'videoPanel'
 			});
 		}
-		
 		var name = record.get('name');
 		var titlePanel = Ext.getCmp('titlePanel');
 		titlePanel.show();
+		var vidDrop = Ext.getCmp('vidDrop');
+		vidDrop.show();
 		var title = Ext.getCmp('titleBox');
 		title.setHtml('<div class="textPanel">'+name+'<div>');
-		
-		//adds video name to store for back navigation
+
+		//adds video record to store for back navigation
 		var nameStore = Ext.getStore('NameRecord');
-		nameStore.add({vidName: name});
-		
-		listGlobal = record;
+		var tempRec = record;
+		tempRec.setId(nameStore.getCount()+1);
+		nameStore.add(tempRec);
 	},
 	
 	//play playlist video
@@ -147,12 +148,16 @@ Ext.define('MyApp.controller.Navigation', {
 		var name = listGlobal.get('name');
 		var titlePanel = Ext.getCmp('titlePanel');
 		titlePanel.show();
+		var vidDrop = Ext.getCmp('vidDrop');
+		vidDrop.show();
 		var title = Ext.getCmp('titleBox');
 		title.setHtml('<div class="textPanel">'+name+'<div>');
 		
-		//adds video name to store for back navigation
+		//adds video record to store for back navigation
 		var nameStore = Ext.getStore('NameRecord');
-		nameStore.add({vidName: name});
+		var tempRec = listGlobal;
+		tempRec.setId(nameStore.getCount()+1);
+		nameStore.add(tempRec);
 	},
 	
 	//back button function
@@ -169,11 +174,18 @@ Ext.define('MyApp.controller.Navigation', {
 			filters.hide();
 		}
 		
-		//removes last video name in store for back navigation
+		//removes last video record in store for back navigation
 		if (active == 'videoPanel') {
 			var nameStore = Ext.getStore('NameRecord');
 			var last = nameStore.last();
 			nameStore.remove(last);
+			listGlobal = nameStore.last();
+			var vidDrop = Ext.getCmp('vidDrop');
+			vidDrop.hide();
+			var overlay = Ext.getCmp('addedOverlay');
+			if (overlay) {
+				overlay.destroy();
+			}
 		}
 		
 		main.pop();
@@ -191,6 +203,8 @@ Ext.define('MyApp.controller.Navigation', {
 			title.hide();
 			var catMenu = Ext.getCmp('catMenu');
 			catMenu.show();
+			var vidDrop = Ext.getCmp('vidDrop');
+			vidDrop.hide();
 		}
 		
 		//resets to previous search filter
@@ -200,6 +214,8 @@ Ext.define('MyApp.controller.Navigation', {
 			filters.show();
 			var title = Ext.getCmp('titlePanel');
 			title.hide();
+			var vidDrop = Ext.getCmp('vidDrop');
+			vidDrop.hide();
 		}
 		
 		if (active == 'settingsPanel') {
@@ -234,9 +250,11 @@ Ext.define('MyApp.controller.Navigation', {
 			var titlePanel = Ext.getCmp('titlePanel');
 			titlePanel.show();
 			var title = Ext.getCmp('titleBox');
-			var nameStore = Ext.getStore('NameRecord');
-			var name = nameStore.last().get('vidName');
+			var nameStore = Ext.getStore('NameRecord');			
+			var name = nameStore.last().get('name');
 			title.setHtml('<div class="textPanel">'+name+'<div>');
+			var vidDrop = Ext.getCmp('vidDrop');
+			vidDrop.show();
 		}
 	}
 });

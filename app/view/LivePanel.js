@@ -15,6 +15,7 @@ Ext.define('MyApp.view.LivePanel', {
 				height: 92,
 				baseCls: 'fontStyle',
 				html: '<table><tr><td style="padding: 13px"><img width="128" height="72" align="center" src="http://www.wnyc.org/i/620/372/l/80/1/blackbox.jpeg" /></td><td><h2><b>Sanctuary</b><h2></td></tr></table>',
+				/*
 				listeners: {
 					initialize: function() {
 						this.element.on({
@@ -29,6 +30,7 @@ Ext.define('MyApp.view.LivePanel', {
 						})
 					}
 				}
+				*/
 			},
 			{
 				xtype: 'panel',
@@ -37,6 +39,7 @@ Ext.define('MyApp.view.LivePanel', {
 				height: 92,
 				baseCls: 'fontStyle',
 				html: '<table><tr><td style="padding: 13px"><img width="128" height="72" align="center" src="http://www.wnyc.org/i/620/372/l/80/1/blackbox.jpeg" /></td><td><h2><b>Fellowship Hall</b><h2></td></tr></table>',
+				/*
 				listeners: {
 					initialize: function() {
 						this.element.on({
@@ -52,6 +55,7 @@ Ext.define('MyApp.view.LivePanel', {
 						})
 					}
 				}
+				*/
 			}
 		]
     }

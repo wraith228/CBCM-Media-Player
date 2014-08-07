@@ -10,6 +10,9 @@ Ext.define('MyApp.controller.Processes', {
 			myContainer: 'View',
 		},
 		control: {
+			'View': {
+				activate: 'onActivate'
+			},			
 			'searchfield': {
 				newSearch : 'onNewSearch'
 			},	
@@ -29,6 +32,12 @@ Ext.define('MyApp.controller.Processes', {
 				tap: 'deleteVid'
 			}
 		} 
+	},
+	
+	onActivate: function() {
+		var store = Ext.getStore('Videos');
+		var last = store.last();
+		listGlobal=last;
 	},
 	
 	//search function
@@ -53,6 +62,12 @@ Ext.define('MyApp.controller.Processes', {
 		title.hide();
 		var catMenu = Ext.getCmp('catMenu');
 		catMenu.hide();
+		var vidDrop = Ext.getCmp('vidDrop');
+		vidDrop.hide();
+		var overlay = Ext.getCmp('addedOverlay');
+		if (overlay) {
+			overlay.destroy();
+		}
 		
 		var searchLabel = Ext.getCmp('searchLabel');
 		searchLabel.setHtml('<div class=textPanel3>Search results for '+queryString+':<div>');
@@ -101,12 +116,12 @@ Ext.define('MyApp.controller.Processes', {
 			var thisRegEx = new RegExp(last, "i");
 			store.filterBy(function(record) {
 				if (thisRegEx.test(record.get('name')) ||
-				  thisRegEx.test(record.get('postDate')) ||
-				  thisRegEx.test(record.get('cong')) ||
-				  thisRegEx.test(record.get('speaker')) ||
-				  thisRegEx.test(record.get('topic'))) {
-					return true;
-				};
+					thisRegEx.test(record.get('postDate')) ||
+					thisRegEx.test(record.get('cong')) ||
+					thisRegEx.test(record.get('speaker')) ||
+					thisRegEx.test(record.get('topic'))) {
+						return true;
+					};
 				return false;
 			});
 		}
@@ -159,11 +174,18 @@ Ext.define('MyApp.controller.Processes', {
 	
 	//add to playlist function
 	addPlay: function() {
-		var noticeBar = Ext.getCmp('noticeBar');
-		noticeBar.setHtml('<div class="textPanel2">Added to playlist<div>');
 		var playStore = Ext.getStore('Playlist');
 		var store = Ext.getStore('Videos');
+		var nameStore = Ext.getStore('NameRecord');
+		var recTemp = listGlobal.setId(nameStore.getCount()+1)
 		playStore.add(listGlobal);
+		
+		//notification overlay
+		
+		var popup = Ext.create('MyApp.view.AddedOverlay');
+		Ext.Viewport.add(popup);
+		popup.show();
+		
 	},
 	
 	//close menus when navigating
@@ -176,6 +198,12 @@ Ext.define('MyApp.controller.Processes', {
 		filters.hide();
 		var catMenu = Ext.getCmp('catMenu');
 		catMenu.hide();
+		var vidDrop = Ext.getCmp('vidDrop');
+		vidDrop.hide();
+		var overlay = Ext.getCmp('addedOverlay');
+		if (overlay) {
+			overlay.destroy();
+		}
 	},
 	
 	//add playlist overlay

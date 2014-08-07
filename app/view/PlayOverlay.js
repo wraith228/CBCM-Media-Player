@@ -15,14 +15,16 @@ Ext.define('MyApp.view.PlayOverlay', {
 		items: [
 			{
 				xtype: 'button',
-				html: 'play',
+				baseCls: 'textBtn',
+				html: '<div class="subTxt2">Play</div>',
 				docked: 'top',
 				flex: 1,
 				action: 'vidPlay',
 			},
 			{
 				xtype: 'button',
-				html: 'delete',
+				baseCls: 'textBtn',
+				html: '<div class="subTxt2">Delete</div>',
 				docked: 'top',
 				flex: 1,
 				action: 'deleteVid',
