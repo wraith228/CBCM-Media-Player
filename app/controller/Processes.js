@@ -176,16 +176,14 @@ Ext.define('MyApp.controller.Processes', {
 	addPlay: function() {
 		var playStore = Ext.getStore('Playlist');
 		var store = Ext.getStore('Videos');
-		var nameStore = Ext.getStore('NameRecord');
-		var recTemp = listGlobal.setId(nameStore.getCount()+1)
-		playStore.add(listGlobal);
+		var tempRec = listGlobal;
+		tempRec.setId(playStore.getCount()+1);
+		playStore.add(tempRec);
 		
 		//notification overlay
-		
 		var popup = Ext.create('MyApp.view.AddedOverlay');
 		Ext.Viewport.add(popup);
 		popup.show();
-		
 	},
 	
 	//close menus when navigating
